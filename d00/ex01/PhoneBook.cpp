@@ -1,4 +1,9 @@
 #include <iostream>
-#include "Contact.class.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
-Contact::Save()
+PhoneBook::PhoneBook(std::string inputs[5]) :
+
+
+
+

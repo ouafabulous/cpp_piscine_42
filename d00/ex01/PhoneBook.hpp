@@ -6,13 +6,16 @@
 
 class PhoneBook {
 
-Public:
+public:
 
-	PhoneBook( void );
+	void	fill_contacts(std::string inputs[5]);
+
+	PhoneBook(std::string inputs[5]);
 	~PhoneBook( void );
 
-Private:
-	Contact	contact[8](std::string inputs[5]);
+private:
+	Contact	contacts[8];
+
 
 };
 

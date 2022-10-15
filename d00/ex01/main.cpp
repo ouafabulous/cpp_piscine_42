@@ -9,15 +9,14 @@ std::string			opt1 = "ADD";
 std::string			opt2 = "SEARCH";
 std::string			opt3 = "EXIT";
 std::string			cmd;
-char				buff[1024];
 std::string			inputs[5];
 std::string			id;
 int					i;
 bool				is_ok;
-PhoneBook			phonebook;
+PhoneBook			repertoire = Phonebook();
 
-std::cout << "";
-while (std::cin >> cmd && cmd != opt3)
+std::cout << "Choose an option amongst the following: ADD, SEARCH, EXIT: ";
+while (std::getline(std::cin, cmd) && cmd != opt3)
 {
 	if (cmd == opt1)
 		{
@@ -29,15 +28,16 @@ while (std::cin >> cmd && cmd != opt3)
 			std::cin >> inputs[2];
 			std::cout << "Phone number: ";
 			std::cin >> inputs[3];
-			std::cout << "Darkest secret";
+			std::cout << "Darkest secret: ";
 			std::cin >> inputs[4];
+			repertoire(inputs);
 		}
 	else if (cmd == opt2)
 	{
 		is_ok = false;
 		while (!is_ok)
 		{
-		std::cout<< "Enter the contact Id (in range 0-7):";
+		std::cout<< "Enter the contact Id (in range 0-7): ";
 		std::cin >> id;
 		try {
 			i = std::stoi(id);
@@ -48,7 +48,7 @@ while (std::cin >> cmd && cmd != opt3)
 			is_ok = false;
 		}
 		}
-		P
+		std::cout <<
 	}
 	else
 	return (0);
