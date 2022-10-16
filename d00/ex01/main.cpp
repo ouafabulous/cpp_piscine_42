@@ -10,10 +10,10 @@ std::string			opt2 = "SEARCH";
 std::string			opt3 = "EXIT";
 std::string			cmd;
 std::string			inputs[5];
-std::string			id;
-int					i;
+std::string			id_txt;
+int					id;
 bool				is_ok;
-PhoneBook			repertoire = Phonebook();
+PhoneBook			repertoire;
 
 std::cout << "Choose an option amongst the following: ADD, SEARCH, EXIT: ";
 while (std::getline(std::cin, cmd) && cmd != opt3)
@@ -30,7 +30,7 @@ while (std::getline(std::cin, cmd) && cmd != opt3)
 			std::cin >> inputs[3];
 			std::cout << "Darkest secret: ";
 			std::cin >> inputs[4];
-			repertoire(inputs);
+			repertoire.fill_contact(inputs);
 		}
 	else if (cmd == opt2)
 	{
@@ -38,18 +38,20 @@ while (std::getline(std::cin, cmd) && cmd != opt3)
 		while (!is_ok)
 		{
 		std::cout<< "Enter the contact Id (in range 0-7): ";
-		std::cin >> id;
+		std::cin >> id_txt;
 		try {
-			i = std::stoi(id);
-			is_ok = true;
+			std::istringstream(id_txt) >> id;
+			if (id >= 0 && id <= 7)
+				is_ok = true;
 		}
-		catch (exception &err)
+		catch (std::exception &err)
 		{
 			is_ok = false;
 		}
 		}
-		std::cout <<
+		repertoire.print_contact(id);
 	}
-	else
+//	std::cout << "Choose an option amongst the following: ADD, SEARCH, EXIT: ";
+}
 	return (0);
 }

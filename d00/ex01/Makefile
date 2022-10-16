@@ -1,7 +1,7 @@
-CC = g++
+CC = c++
 FLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRCS = PhoneBook.cpp\
-		Conact.cpp\
+		Contact.cpp\
 		main.cpp
 HEADERS = PhoneBook.hpp\
 		Contact.hpp
@@ -11,12 +11,12 @@ NAME = phonebook
 all: $(NAME)
 
 %.o: %.cpp $(HEADERS)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	$(CC) $(FLAGS) $^ -o $(NAME)
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -rf $(NAME)

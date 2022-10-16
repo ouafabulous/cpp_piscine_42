@@ -8,15 +8,15 @@ class PhoneBook {
 
 public:
 
-	void	fill_contacts(std::string inputs[5]);
-
-	PhoneBook(std::string inputs[5]);
+	PhoneBook(void);
 	~PhoneBook( void );
 
+	void	fill_contact(std::string inputs[5]);
+	void	print_contact(int id);
+
 private:
-	Contact	contacts[8];
-
-
+	Contact	_contacts[8];
+	int		_i;
 };
 
 #endif

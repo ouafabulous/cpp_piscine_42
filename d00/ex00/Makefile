@@ -1,4 +1,4 @@
-CC = g++
+CC = c++
 FLAGS = -Wall -Wextra -Werror -g -std=c++98
 SRC = megaphone.cpp
 HEADER = megaphone.hpp
