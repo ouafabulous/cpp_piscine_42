@@ -5,14 +5,40 @@
 #include <climits>
 #include <cstdlib>
 
-void	protected_cout(std::string prompt, std::string *cmd)
+void protected_cout(std::string prompt, std::string *cmd)
 {
 	std::cout << prompt;
-	if (std::cin.eof()) {
+	std::getline(std::cin, *cmd);
+	if (std::cin.eof())
+	{
 		std::cin.ignore(INT_MAX, '\n');
 		exit(1);
 	}
-	std::getline(std::cin, *cmd);
+}
+
+void recursive_print(PhoneBook repertoire)
+{
+	bool is_ok;
+	std::string id_txt;
+	int id;
+
+	is_ok = false;
+	while (!is_ok)
+	{
+		protected_cout("Enter a contact Id (in range 0-7): ", &id_txt);
+		try
+		{
+			std::istringstream(id_txt) >> id;
+			if (id >= 0 && id <= 7)
+				is_ok = true;
+		}
+		catch (std::exception &err)
+		{
+			is_ok = false;
+		}
+	}
+	repertoire.print_contact(id);
+	recursive_print(repertoire);
 }
 
 int main(void)
@@ -23,9 +49,6 @@ int main(void)
 	std::string opt3 = "EXIT";
 	std::string cmd;
 	std::string inputs[5];
-	std::string id_txt;
-	int id;
-	bool is_ok;
 	PhoneBook repertoire;
 
 	while (1)
@@ -42,29 +65,15 @@ int main(void)
 		}
 		else if (cmd == opt2)
 		{
-			is_ok = false;
-			while (!is_ok)
-			{
-				protected_cout("Enter a contact Id (in range 0-7): ", &id_txt);
-				try
-				{
-					std::istringstream(id_txt) >> id;
-					if (id >= 0 && id <= 7)
-						is_ok = true;
-				}
-				catch (std::exception &err)
-				{
-					is_ok = false;
-				}
-			}
-			repertoire.print_contact(id);
+			recursive_print(repertoire);
 		}
 		else if (cmd == opt3 || std::cin.eof())
 		{
 			break;
 		}
-		else {
-			continue ;
+		else
+		{
+			continue;
 		}
 		std::cin.ignore(INT_MAX, '\n');
 	}

@@ -32,7 +32,7 @@ void	print_10(std::string str, int i) {
 		std::cout.width(10); std::cout << std::right << str;
 	}
 	else {
-		std::cout.width(10); std::cout << std::right << str.substr(0,9);
+		std::cout.width(10); std::cout << std::right << str.substr(0,8) << ".";
 	}
 	if (i == 1) {
 		std::cout << "|";
