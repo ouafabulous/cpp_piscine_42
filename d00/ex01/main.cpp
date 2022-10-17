@@ -22,23 +22,16 @@ void recursive_print(PhoneBook repertoire)
 	std::string id_txt;
 	int id;
 
+	repertoire.print_contacts();
 	is_ok = false;
 	while (!is_ok)
 	{
-		protected_cout("Enter a contact Id (in range 0-7): ", &id_txt);
-		try
-		{
-			std::istringstream(id_txt) >> id;
-			if (id >= 0 && id <= 7)
-				is_ok = true;
-		}
-		catch (std::exception &err)
-		{
-			is_ok = false;
-		}
+		protected_cout("Enter a contact Id (in range 1-8): ", &id_txt);
+		std::istringstream(id_txt) >> id;
+		if (id > 0 && id < 8)
+			is_ok = true;
 	}
-	repertoire.print_contact(id);
-	recursive_print(repertoire);
+	repertoire.print_contact(id - 1, 2);
 }
 
 int main(void)
@@ -75,7 +68,6 @@ int main(void)
 		{
 			continue;
 		}
-		std::cin.ignore(INT_MAX, '\n');
 	}
 	return (0);
 }

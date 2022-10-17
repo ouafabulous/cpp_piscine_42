@@ -28,11 +28,11 @@ void	PhoneBook::fill_contact(std::string inputs[5]) {
 }
 
 void	print_10(std::string str, int i) {
-	if (str.length() <= 0) {
+	if (str.length() <= 10) {
 		std::cout.width(10); std::cout << std::right << str;
 	}
 	else {
-		std::cout.width(10); std::cout << std::right << str.substr(0,8) << ".";
+		std::cout.width(10); std::cout << std::right << str.substr(0,9) << ".";
 	}
 	if (i == 1) {
 		std::cout << "|";
@@ -42,19 +42,36 @@ void	print_10(std::string str, int i) {
 	}
 }
 
-void	PhoneBook::print_contact(int id) {
+void	PhoneBook::print_contacts(void) {
+	int	j;
 
-	std::string	FN = this->_contacts[id].getFirstName();
-	std::string	LN = this->_contacts[id].getLastName();
-	std::string N = this->_contacts[id].getNickName();
-	std::string PN = this->_contacts[id].getNickName();
-	std::string	DS = this->_contacts[id].getDarkestSecret();
+	j = 0;
+	while (j < this->_i)
+	{
+		print_contact(j,1);
+		j++;
+	}
+}
 
-	print_10(FN, 1);
-	print_10(LN, 1);
-	print_10(N, 1);
-	print_10(PN, 1);
-	print_10(DS, 0);
+void	PhoneBook::print_contact(int id, int type) {
+
+	if (type == 1 || (type == 2 && id < this->_i))
+	{
+		std::string	FN = this->_contacts[id].getFirstName();
+		std::string	LN = this->_contacts[id].getLastName();
+		std::string N = this->_contacts[id].getNickName();
+		std::string PN = this->_contacts[id].getNickName();
+		std::string	DS = this->_contacts[id].getDarkestSecret();
+
+		print_10(FN, 1);
+		print_10(LN, 1);
+		print_10(N, 1);
+		print_10(PN, 1);
+		print_10(DS, 0);
+	}
+	else if (id >= this->_i) {
+		std::cout << "Index out of range" << std::endl;
+	}
 }
 
 
