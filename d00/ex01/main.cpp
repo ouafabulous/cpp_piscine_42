@@ -2,6 +2,18 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <climits>
+#include <cstdlib>
+
+void	protected_cout(std::string prompt, std::string *cmd)
+{
+	std::cout << prompt;
+	if (std::cin.eof()) {
+		std::cin.ignore(INT_MAX, '\n');
+		exit(1);
+	}
+	std::getline(std::cin, *cmd);
+}
 
 int main(void)
 {
@@ -18,20 +30,14 @@ int main(void)
 
 	while (1)
 	{
-		std::cout << "Choose an option amongst the following: ADD, SEARCH, EXIT: ";
-		std::getline(std::cin, cmd);
+		protected_cout("Choose an option amongst the following: ADD, SEARCH, EXIT: ", &cmd);
 		if (cmd == opt1)
 		{
-			std::cout << "First name: ";
-			std::cin >> inputs[0];
-			std::cout << "Last name: ";
-			std::cin >> inputs[1];
-			std::cout << "Nickname: ";
-			std::cin >> inputs[2];
-			std::cout << "Phone number: ";
-			std::cin >> inputs[3];
-			std::cout << "Darkest secret: ";
-			std::cin >> inputs[4];
+			protected_cout("First name: ", &(inputs[0]));
+			protected_cout("Last name: ", &(inputs[1]));
+			protected_cout("Nickname: ", &(inputs[2]));
+			protected_cout("Phone number: ", &(inputs[3]));
+			protected_cout("Darkest secret: ", &(inputs[4]));
 			repertoire.fill_contact(inputs);
 		}
 		else if (cmd == opt2)
@@ -39,8 +45,7 @@ int main(void)
 			is_ok = false;
 			while (!is_ok)
 			{
-				std::cout << "Enter the contact Id (in range 0-7): ";
-				std::cin >> id_txt;
+				protected_cout("Enter a contact Id (in range 0-7): ", &id_txt);
 				try
 				{
 					std::istringstream(id_txt) >> id;
@@ -54,10 +59,14 @@ int main(void)
 			}
 			repertoire.print_contact(id);
 		}
-		else if (cmd == opt3)
+		else if (cmd == opt3 || std::cin.eof())
 		{
 			break;
 		}
+		else {
+			continue ;
+		}
+		std::cin.ignore(INT_MAX, '\n');
 	}
 	return (0);
 }

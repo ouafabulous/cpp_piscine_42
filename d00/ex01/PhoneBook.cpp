@@ -37,6 +37,9 @@ void	print_10(std::string str, int i) {
 	if (i == 1) {
 		std::cout << "|";
 	}
+	else {
+		std::cout << std::endl;
+	}
 }
 
 void	PhoneBook::print_contact(int id) {
