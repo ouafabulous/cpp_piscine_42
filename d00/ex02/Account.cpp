@@ -91,6 +91,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 		this->_nbWithdrawals++;
 		Account::_totalNbWithdrawals++;
 		this->_amount -= withdrawal;
+		Account::_totalAmount -= withdrawal;
 		Account::_displayTimestamp();
 		opti_cout(this->_accountIndex, p_amount, this->_amount, 0, withdrawal,this->_nbWithdrawals, 3);
 		return (true);

@@ -6,7 +6,6 @@
 void print_upper_str(std::string str)
 {
 	std::locale loc;
-	int i;
 
 	for (std::string::size_type i = 0; i < str.length(); ++i)
 		std::cout << std::toupper(str[i], loc);
@@ -15,8 +14,6 @@ void print_upper_str(std::string str)
 
 int main(int ac, char **av)
 {
-	std::string str1("shhhhh... I think the students are asleep...");
-	std::string str2("Damnit ! Sorry students, I thought this thing was off.");
 	std::string input;
 	std::stringstream ss;
 	int	i;
