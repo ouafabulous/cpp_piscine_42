@@ -7,11 +7,11 @@ NAME = megaphone
 
 all: $(NAME)
 
-%.o: %.cpp HEADER
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp $(HEADER)
+	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $^ -o $(NAME)
+	@$(CC) $(FLAGS) $^ -o $(NAME)
 clean:
 	@rm -rf $(OBJ)
 

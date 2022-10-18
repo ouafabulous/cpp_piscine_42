@@ -1,12 +1,10 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror -g -std=c++98
-SRCS = PhoneBook.cpp\
-		Contact.cpp\
-		main.cpp
-HEADERS = PhoneBook.hpp\
-		Contact.hpp
+SRCS = Account.cpp\
+		tests.cpp
+HEADERS = Account.hpp
 OBJS = $(SRCS:%.cpp=%.o)
-NAME = phonebook
+NAME = accounts
 
 all: $(NAME)
 
@@ -14,7 +12,7 @@ all: $(NAME)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(CC) $(FLAGS) $^ -o $(NAME)
+	$(CC) $(FLAGS) $^ -o $(NAME)
 clean:
 	@rm -rf $(OBJS)
 

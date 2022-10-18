@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
@@ -24,15 +25,16 @@ void	PhoneBook::fill_contact(std::string inputs[5]) {
 	this->_contacts[j].setNickName(inputs[2]);
 	this->_contacts[j].setPhoneNumber(inputs[3]);
 	this->_contacts[j].setDarkestSecret(inputs[4]);
-	this->_i++;
+	if (this->_i < 8)
+		this->_i++;
 }
 
 void	print_10(std::string str, int i) {
 	if (str.length() <= 10) {
-		std::cout.width(10); std::cout << std::right << str;
+		std::cout << std::setw(10) << str;
 	}
 	else {
-		std::cout.width(10); std::cout << std::right << str.substr(0,9) << ".";
+		std::cout << str.substr(0,9) << ".";
 	}
 	if (i == 1) {
 		std::cout << "|";
