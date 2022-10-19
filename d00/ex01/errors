@@ -1,0 +1,5 @@
+-- search indice 8 ne fontionne pas meme s'il y a un contact avec l'id 8'
+-- phone number qui affiche le nickname
+-- champs vide acceptes alors qu'il ne faut pas
+-- ne pas afficher le secret
+-- ajouter const a la fin des fonctions pour indiquer q'elles alterent pas les valeurs des attributs
