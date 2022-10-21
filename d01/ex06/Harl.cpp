@@ -3,10 +3,10 @@
 const char *Harl::_level[NUMBER] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 Harl::Harl() {
-	_tab[0] = &Harl::_debug;
-	_tab[1] = &Harl::_info;
-	_tab[2] = &Harl::_warning;
-	_tab[3] = &Harl::_error;
+	_tab[DEBUG] = &Harl::_debug;
+	_tab[INFO] = &Harl::_info;
+	_tab[WARNING] = &Harl::_warning;
+	_tab[ERROR] = &Harl::_error;
 }
 
 Harl::~Harl() {}
@@ -39,9 +39,35 @@ void Harl::complain(std::string level) const
 	while (i < NUMBER)
 	{
 		if (!level.compare(_level[i])) {
-			Func func = _tab[i];
-			(this->*func)();
-			return ;
+			switch(i) {
+				case DEBUG:
+				{
+					Func func = _tab[DEBUG];
+					(this->*func)();
+					std::cout << std::endl;
+					__attribute__((fallthrough));
+				}
+				case INFO:
+				{
+					Func func = _tab[INFO];
+					(this->*func)();
+					std::cout << std::endl;
+					__attribute__((fallthrough));
+				}
+				case WARNING:
+				{
+					Func func = _tab[WARNING];
+					(this->*func)();
+					std::cout << std::endl;
+					__attribute__((fallthrough));
+				}
+				case ERROR:
+				{
+					Func func = _tab[ERROR];
+					(this->*func)();
+					return ;
+				}
+			}
 		}
 		i++;
 	}

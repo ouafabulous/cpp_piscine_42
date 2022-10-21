@@ -18,7 +18,7 @@ int main(int ac, char **av)
 		std::string			file_content;
 		int					index;
 
-		if (ifs.fail()) {
+		if (not ifs.good()) {
 			std::cout << "File Error." << std::endl << "1- Check if the file exists." << std::endl << "2- Check its permissions." << std::endl;
 			return (1);
 		}
@@ -30,7 +30,7 @@ int main(int ac, char **av)
 
 		std::ofstream		ofs(outfile_name.c_str());
 
-		if (ofs.fail()) {
+		if (not ofs.good()) {
 			std::cout << "Couldn't create <output_file>" << std::endl;
 			return (1);
 		}
@@ -41,13 +41,16 @@ int main(int ac, char **av)
 		while (true) {
 			index = file_content.find(to_replace);
 			if (index < 0) {
+				ofs << file_content;
 				break;
 			}
 			file_content.erase(index, to_replace.length());
 			file_content.insert(index, replace_by);
+			index += replace_by.length();
+			ofs << file_content.substr(0, index);
+			file_content = std::string (&(file_content[index]));
 		}
 
-		ofs << file_content;
 
 	}
 	else

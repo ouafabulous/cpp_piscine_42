@@ -12,7 +12,7 @@ NAME = violence
 
 all: $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

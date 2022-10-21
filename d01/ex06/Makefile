@@ -4,7 +4,7 @@ SRCS = main.cpp \
 		Harl.cpp
 HEADERS = Harl.hpp
 OBJS = $(SRCS:%.cpp=%.o)
-NAME = harl
+NAME = harl_again
 
 all: $(NAME)
 

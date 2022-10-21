@@ -2,6 +2,11 @@
 # define ZOMBIE_H
 
 #include <string>
+#include <iostream>
+
+#define RESET   "\033[0m"
+#define RED     "\033[1m\033[31m"
+#define GREEN   "\033[1m\033[32m"
 
 class Zombie {
 

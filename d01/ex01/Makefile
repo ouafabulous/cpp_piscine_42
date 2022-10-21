@@ -5,11 +5,11 @@ SRCS = main.cpp \
 		zombieHorde.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 HEADERS = Zombie.hpp
-NAME = Moarbrainz!
+NAME = moarbrainz
 
 all: $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
