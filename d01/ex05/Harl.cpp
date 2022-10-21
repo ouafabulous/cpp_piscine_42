@@ -36,10 +36,12 @@ void Harl::complain(std::string level) const
 	int i;
 	i = 0;
 
-	_tab[0] = &Harl::_info;
 	while (i < NUMBER)
 	{
-		if (level.compare(_level[i]))
-			((const Harl *))->Harl::_tab[i]();
+		if (level.compare(_level[i])) {
+			Func func = _tab[i];
+			(this->*func)();
+			i++;
+		}
 	}
 }

@@ -8,9 +8,10 @@
 
 class Harl
 {
-private:
-typedef void (Harl::*Func)(void) const;
 
+private:
+
+	typedef void (Harl::*Func)(void) const;
 
 	enum {
 	DEBUG,
