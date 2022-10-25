@@ -6,23 +6,23 @@
 
 Fixed::Fixed() : _fixed_nb(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+//	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &src)
 {
-	(void)src;
-	std::cout << "Copy constructor called with _nb_: " << src._fixed_nb << std::endl;
+	*this = src;
+//	std::cout << "Copy constructor called with _nb_: " << src._fixed_nb << std::endl;
 }
 
 Fixed::Fixed(int int_pt) : _fixed_nb(int_pt * (1 << _bits_nb))
 {
-	std::cout << "Int constructor called with " << int_pt << std::endl;
+//	std::cout << "Int constructor called with " << int_pt << std::endl;
 }
 
-Fixed::Fixed(float float_pt) : _fixed_nb(float_pt * (1 << _bits_nb))
+Fixed::Fixed(float float_pt) : _fixed_nb(roundf(float_pt * (1 << _bits_nb)))
 {
-	std::cout << "float constructor called with " << float_pt << std::endl;
+//	std::cout << "float constructor called with " << float_pt << std::endl;
 	// std::cout << "Float constructor called" << std::endl;
 }
 
@@ -32,7 +32,7 @@ Fixed::Fixed(float float_pt) : _fixed_nb(float_pt * (1 << _bits_nb))
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+//	std::cout << "Destructor called" << std::endl;
 }
 
 /*
@@ -88,9 +88,14 @@ Fixed Fixed::operator-(Fixed const &rhs)
 
 Fixed Fixed::operator*(Fixed const &rhs)
 {
-	std::cout << "multiplication result between " << this->getRawBits() << " and " << rhs.getRawBits() << "is: " << this->getRawBits() * rhs.getRawBits() << std::endl;
-	return Fixed(2);
-	return (Fixed((float)(this->getRawBits()) * (float)(rhs.getRawBits())));
+//	std::cout << "multiplication result between " << this->getRawBits() << " and " << rhs.getRawBits() << "is: " << this->getRawBits() * rhs.getRawBits() << std::endl;
+
+	Fixed	result;
+
+	int	mul = this->_fixed_nb * rhs._fixed_nb;
+	result._fixed_nb = (mul >> _bits_nb) + ((mul >> _bits_nb) & 1);
+	return (result);
+	// return (Fixed(this->toFloat() * rhs.toFloat()));
 }
 
 Fixed Fixed::operator/(Fixed const &rhs)
@@ -113,8 +118,8 @@ Fixed &Fixed::operator++()
 Fixed Fixed::operator++(int)
 {
 	// std::cout << "++()" << std::endl;
-	Fixed temp = *this;
-	this->_fixed_nb++;
+	Fixed temp(*this);
+	++(*this);
 	return (temp);
 }
 
@@ -164,13 +169,13 @@ Fixed &Fixed::min(Fixed const &obj1, Fixed const &obj2)
 {
 	Fixed temp;
 
-	if (obj1.getRawBits() < obj2.getRawBits())
+	if (obj1.getRawBits() > obj2.getRawBits())
 	{
-		temp = Fixed(obj1.getRawBits());
+		temp._fixed_nb = obj1.getRawBits();
 	}
 	else
 	{
-		temp = Fixed(obj2.getRawBits());
+		temp._fixed_nb = obj2.getRawBits();
 	}
 	Fixed &temp2 = temp;
 	return (temp2);
@@ -191,11 +196,11 @@ Fixed &Fixed::max(Fixed const &obj1, Fixed const &obj2)
 
 	if (obj1.getRawBits() > obj2.getRawBits())
 	{
-		temp = Fixed(obj1.getRawBits());
+		temp._fixed_nb = obj1.getRawBits();
 	}
 	else
 	{
-		temp = Fixed(obj2.getRawBits());
+		temp._fixed_nb = obj2.getRawBits();
 	}
 	Fixed &temp2 = temp;
 	return (temp2);
