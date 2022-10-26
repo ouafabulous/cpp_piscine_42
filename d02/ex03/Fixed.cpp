@@ -93,7 +93,7 @@ Fixed Fixed::operator*(Fixed const &rhs)
 	Fixed	result;
 
 	int	mul = this->_fixed_nb * rhs._fixed_nb;
-	result._fixed_nb = (mul >> _bits_nb);
+	result._fixed_nb = (mul >> _bits_nb) + ((mul >> _bits_nb) & 1);
 	return (result);
 	// return (Fixed(this->toFloat() * rhs.toFloat()));
 }
