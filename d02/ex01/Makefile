@@ -1,5 +1,5 @@
 CC = c++
-FLAGS = -Wall -Wextra -Werror -g -std=c++98
+FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
 SRCS = main.cpp \
 		Fixed.cpp
 HEADERS = Fixed.hpp

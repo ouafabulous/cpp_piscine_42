@@ -1,12 +1,10 @@
 #include "Fixed.hpp"
 
-// const int Fixed::_bits_nb = 12;
-
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Fixed::Fixed()  : _fixed_nb(0)
+Fixed::Fixed() : _fixed_nb(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 }
@@ -22,7 +20,7 @@ Fixed::Fixed(int const int_pt) : _fixed_nb(int_pt * (1 << _bits_nb))
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(float const float_pt) : _fixed_nb(float_pt * (1 << _bits_nb))
+Fixed::Fixed(float const float_pt) : _fixed_nb(roundf(float_pt * (1 << _bits_nb)))
 {
 	std::cout << "Float constructor called" << std::endl;
 }
