@@ -4,14 +4,14 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Fixed::Fixed() : _integral(0)
+Fixed::Fixed() : _fixed_nb(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called" << src._fixed_nb << std::endl;
 	*this = src;
 }
 
@@ -33,31 +33,29 @@ Fixed &Fixed::operator=(Fixed const &rhs)
 	std::cout << "Copy assignement operator called" << std::endl;
 	if (this != &rhs)
 	{
-		this->_integral = rhs.getRawBits();
+		this->_fixed_nb = rhs.getRawBits();
 	}
 	return *this;
-}
-
-std::ostream &operator<<(std::ostream &o, Fixed const &i)
-{
-	o << "Integral = " << i.getRawBits();
-	return o;
 }
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-
-
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
+void Fixed::setRawBits(int const raw)
+{
+	std::cout << "setRawBits member function called" << std::endl;
+	_fixed_nb = raw;
+}
+
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	return (0);
+	return (_fixed_nb);
 }
 
 /* ************************************************************************** */
