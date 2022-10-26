@@ -12,10 +12,10 @@ public:
 	Fixed(const Fixed &src);
 	~Fixed();
 
-	Fixed &operator=(Fixed const &rhs);
+	Fixed	&operator=(Fixed const &rhs);
 
-	int getRawBits(void) const;
-	void setRawBits(int const raw);
+	int		getRawBits(void) const;
+	void	setRawBits(int const raw);
 
 private:
 	int					_fixed_nb;
