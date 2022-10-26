@@ -11,8 +11,8 @@ class Fixed
 public:
 	Fixed();
 	Fixed(const Fixed &src);
-	Fixed(int int_pt);
-	Fixed(float float_pt);
+	Fixed(int const int_pt);
+	Fixed(float const float_pt);
 	~Fixed();
 
 	Fixed &operator=(Fixed const &rhs);
@@ -36,10 +36,10 @@ public:
 
 	float toFloat(void) const;
 	int toInt(void) const;
-	static Fixed &min(Fixed &obj1, Fixed &obj2);
-	static Fixed &min(Fixed const &obj1, Fixed const &obj2);
-	static Fixed &max(Fixed &obj1, Fixed &obj2);
-	static Fixed &max(Fixed const &obj1, Fixed const &obj2);
+	static Fixed		&min(Fixed &obj1, Fixed &obj2);
+	static Fixed const	&min(Fixed const &obj1, Fixed const &obj2);
+	static Fixed		&max(Fixed &obj1, Fixed &obj2);
+	static Fixed const	&max(Fixed const &obj1, Fixed const &obj2);
 
 private:
 	int _fixed_nb;
