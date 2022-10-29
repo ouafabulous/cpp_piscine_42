@@ -6,26 +6,22 @@
 
 ClapTrap::ClapTrap() : _hp(10), _ep(10), _ad(0)
 {
-	std::cout << GREEN << "Default constructor called for ClapTrap" << RESET << std::endl;
+	std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad)
+ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) : _name(name), _hp(hp), _ep(ep), _ad(ad)
 {
-	std::cout << GREEN << "Constructor with all attributes called for ClapTrap" << RESET << std::endl;
-	_name = name;
-	_hp = hp;
-	_ep = ep;
-	_ad = ad;
+	std::cout << "ClapTrap all attributes constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0)
 {
-	std::cout << GREEN << "Name constructor called for ClapTrap" << RESET << std::endl;
+	std::cout << "ClapTrap name constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
 {
-	std::cout << GREEN << "Copy constructor called for ClapTrap" << RESET << std::endl;
+	std::cout << "ClapTrap copy constructor called" << std::endl;
 	*this = src;
 }
 
@@ -35,7 +31,7 @@ ClapTrap::ClapTrap(const ClapTrap &src)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << GREEN << "Destructor called for ClapTrap" << RESET <<std::endl;
+	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
 /*
@@ -56,7 +52,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &rhs)
 
 std::ostream &operator<<(std::ostream &o, ClapTrap const &i)
 {
-	std::cout << GREEN << "ClapTrap " << i.getName() << " game summary: HitPoints(" << i.getHp() << "), EnergyPoints(" << i.getEp() << "), AttackDamage(" << i.getAd() << ")." << RESET << std::endl;
+	std::cout << "ClapTrap " << i.getName() << " game summary: HitPoints(" << i.getHp() << "), EnergyPoints(" << i.getEp() << "), AttackDamage(" << i.getAd() << ")." << std::endl;
 	return o;
 }
 
@@ -67,7 +63,7 @@ std::ostream &operator<<(std::ostream &o, ClapTrap const &i)
 int		ClapTrap::checkDeath()
 {
 	if (!getHp() || !getEp()) {
-		std::cout << GREEN << "[GAME OVER]" << std::endl;
+		std::cout << BLUE << "[GAME OVER]" << std::endl;
 		std::cout << "ClapTrap " << getName() << " lost!" << RESET << std::endl;
 		return 1;
 	}
@@ -76,35 +72,25 @@ int		ClapTrap::checkDeath()
 
 void	ClapTrap::attack(const std::string &target)
 {
-	ClapTrap	the_target(target);
-
 	setEp("-");
-	std::cout << GREEN << "[ATTAAAAACK!!!]" << std::endl;
-	if (_amount < 2) {
-		std::cout << "ClapTrap " << _name << " attacks " << the_target.getName() << " , causing " << _amount << " point of damage!" << RESET << std::endl;
+	std::cout << RED << "[ATTAAAAACK!!!]" << std::endl;
+	if (getAd() < 2) {
+		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << getAd() << " point of damage!" << std::endl;
+		std::cout << "ClapTrap " << _name << "'s remaining Energy Points: " << getEp() << RESET << std::endl;
 	}
 	else {
-		std::cout << "ClapTrap " << _name << " attacks " << the_target.getName() << " , causing " << _amount << " points of damage!" << RESET << std::endl;
-	}
-	the_target.takeDamage(_amount);
-	if (checkDeath()) {
-		return ;
+		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << getAd() << " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << _name << "'s remaining Energy Points: " << getEp() << RESET << std::endl;
 	}
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << GREEN <<"[TAKE DAMAGE]" << std::endl;
+	std::cout << YELLOW <<"[TAKE DAMAGE]" << std::endl;
 	std::cout << "ClapTrap " << getName() << "'s Hit Points before damage: " << getHp() << std::endl;
-	std::cout << "ClapTrap " << getName() << "'s Attack Damage before damage: " << getAd() << std::endl;
-	setAd("+", amount);
 	setHp("-", amount);
 	std::cout << "----------" << std::endl;
-	std::cout << "ClapTrap " << getName() << "'s Hit points after damage: " << getHp() << std::endl;
-	std::cout << "ClapTrap " << getName() << "'s Attack damage after damage: " << getAd() << RESET << std::endl;
-	if (checkDeath()) {
-		return ;
-	}
+	std::cout << "ClapTrap " << getName() << "'s Hit points after damage: " << getHp() << RESET << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
@@ -117,9 +103,6 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	std::cout << "----------" << std::endl;
 	std::cout << "ClapTrap " << getName() << "'s Hit Points after being repaired: " << getHp() << std::endl;
 	std::cout << "ClapTrap " << getName() << "'s Energy Points after being repaired: " << getEp() << RESET << std::endl;
-	if (checkDeath()) {
-		return ;
-	}
 }
 
 /*
@@ -149,7 +132,9 @@ void ClapTrap::setHp(std::string op, unsigned int amount)
 	}
 	else if (!op.compare("+"))
 	{
-		_hp += amount;
+		if (_hp < HP_CT) {
+			_hp += amount;
+		}
 	}
 	return;
 }

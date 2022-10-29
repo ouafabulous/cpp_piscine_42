@@ -5,8 +5,11 @@
 # include <string>
 # include "ClapTrap.hpp"
 
+# define HP_ST 100
+# define EP_ST 50
+# define AD_ST 20
 
-class ScavTrap : public ClapTrap
+class ScavTrap : public virtual ClapTrap
 {
 
 	public:
@@ -23,9 +26,9 @@ class ScavTrap : public ClapTrap
 		void	beRepaired(unsigned int amount);
 		int		checkDeath();
 
-		void	guardGate();
+		void	setHp(std::string op, unsigned int amount);
 
-	private:
+		void	guardGate();
 
 };
 

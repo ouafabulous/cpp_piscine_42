@@ -11,6 +11,10 @@
 # define RESET   "\033[0m"
 # define GREEN   "\033[1m\033[32m"
 
+# define HP_CT 10
+# define EP_CT 10
+# define AD_CT 10
+
 class ClapTrap
 {
 
@@ -47,7 +51,6 @@ class ClapTrap
 		unsigned int				_hp;
 		unsigned int				_ep;
 		unsigned int				_ad;
-		static const unsigned int	_amount = 10;
 
 };
 

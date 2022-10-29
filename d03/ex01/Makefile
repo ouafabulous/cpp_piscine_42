@@ -6,7 +6,7 @@ SRCS = main.cpp \
 HEADERS = ClapTrap.hpp \
 		ScavTrap.hpp
 OBJS = $(SRCS:%.cpp=%.o)
-NAME = claptrap
+NAME = ScavTrap
 
 all: $(NAME)
 
