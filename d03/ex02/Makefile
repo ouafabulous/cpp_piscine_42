@@ -8,7 +8,7 @@ HEADERS = ClapTrap.hpp \
 		ScavTrap.hpp \
 		FragTrap.hpp
 OBJS = $(SRCS:%.cpp=%.o)
-NAME = claptrap
+NAME = fragtrap
 
 all: $(NAME)
 

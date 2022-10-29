@@ -3,11 +3,10 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-
 # include <iostream>
 # include <string>
 
-class DiamondTrap : public ScavTrap, public FragTrap
+class DiamondTrap : public virtual ScavTrap, public virtual FragTrap
 {
 
 	public:
@@ -19,7 +18,18 @@ class DiamondTrap : public ScavTrap, public FragTrap
 
 		DiamondTrap &		operator=( DiamondTrap const & rhs );
 
+		void				attack(const std::string& target);
+		int					checkDeath();
+		void				takeDamage(unsigned int amount);
+		void				beRepaired(unsigned int amount);
+
+		void				whoAmI();
+
+		void				setHp(std::string op, unsigned int amount);
+
 	private:
+
+		std::string			_name;
 
 };
 

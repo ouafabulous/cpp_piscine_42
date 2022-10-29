@@ -10,6 +10,11 @@
 # define RED     "\033[1m\033[31m"
 # define RESET   "\033[0m"
 # define GREEN   "\033[1m\033[32m"
+# define YELLOW_NEG "\033[33;7"
+
+# define HP_CT 10
+# define EP_CT 10
+# define AD_CT 10
 
 class ClapTrap
 {
@@ -17,17 +22,17 @@ class ClapTrap
 	public:
 
 		ClapTrap();
-		ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad);
 		ClapTrap(std::string name);
+		ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad);
 		ClapTrap( ClapTrap const & src );
 		~ClapTrap();
 
 		ClapTrap &		operator=( ClapTrap const & rhs );
 
-		virtual void	attack(const std::string& target);
-		virtual void	takeDamage(unsigned int amount);
-		virtual void	beRepaired(unsigned int amount);
-		virtual int		checkDeath();
+		void			attack(const std::string& target);
+		void			takeDamage(unsigned int amount);
+		void			beRepaired(unsigned int amount);
+		int				checkDeath();
 
 
 		std::string		getName() const;
@@ -48,7 +53,6 @@ class ClapTrap
 		unsigned int				_hp;
 		unsigned int				_ep;
 		unsigned int				_ad;
-		static const unsigned int	_amount = 10;
 
 };
 

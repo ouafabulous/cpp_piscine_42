@@ -5,6 +5,10 @@
 # include <string>
 # include "ClapTrap.hpp"
 
+# define HP_FT 100
+# define EP_FT 100
+# define AD_FT 30
+
 class FragTrap : public virtual ClapTrap
 {
 
@@ -21,6 +25,8 @@ class FragTrap : public virtual ClapTrap
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 		int		checkDeath();
+
+		void	setHp(std::string op, unsigned int amount);
 
 		void	highFivesGuys(void);
 

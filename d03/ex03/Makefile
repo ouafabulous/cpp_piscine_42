@@ -1,4 +1,5 @@
-CC = c++
+C
+= c++
 FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
 SRCS = main.cpp \
 		ClapTrap.cpp \
@@ -10,7 +11,7 @@ HEADERS = ClapTrap.hpp \
 		FragTrap.hpp \
 		DiamondTrap.hpp
 OBJS = $(SRCS:%.cpp=%.o)
-NAME = claptrap
+NAME = diamondtrap
 
 all: $(NAME)
 

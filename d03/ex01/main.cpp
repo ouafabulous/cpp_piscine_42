@@ -6,8 +6,9 @@ int main()
 	ClapTrap	ct_1("Clappinette");
 	ScavTrap	st_2("Charles");
 
-	std::cout << "Amoeba: " << st_1.getName() << std::endl;
-	std::cout << "Charles: " << st_2.getName() << std::endl;
+	st_1.guardGate();
+	st_2.guardGate();
+
 	// while (1)
 	// {
 	// 	st_1.attack(st_2.getName());

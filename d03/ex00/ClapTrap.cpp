@@ -58,7 +58,7 @@ std::ostream &operator<<(std::ostream &o, ClapTrap const &i)
 int		ClapTrap::checkDeath()
 {
 	if (!getHp() || !getEp()) {
-		std::cout << BLUE << "[GAME OVER]" << std::endl;
+		std::cout << BLUE << "[GAME OVER 💀💀💀]" << std::endl;
 		std::cout << "ClapTrap " << getName() << " lost!" << RESET << std::endl;
 		return 1;
 	}
@@ -68,7 +68,7 @@ int		ClapTrap::checkDeath()
 void	ClapTrap::attack(const std::string &target)
 {
 	setEp("-");
-	std::cout << RED << "[ATTAAAAACK!!!]" << std::endl;
+	std::cout << RED << "[ATTAAAAACK!!! 💥💥💥]" << std::endl;
 	if (getAd() < 2) {
 		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << getAd() << " point of damage!" << std::endl;
 		std::cout << "ClapTrap " << _name << "'s remaining Energy Points: " << getEp() << RESET << std::endl;
@@ -81,7 +81,7 @@ void	ClapTrap::attack(const std::string &target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << YELLOW <<"[TAKE DAMAGE]" << std::endl;
+	std::cout << YELLOW <<"[TAKE DAMAGE 🤕🤕🤕]" << std::endl;
 	std::cout << "ClapTrap " << getName() << "'s Hit Points before damage: " << getHp() << std::endl;
 	setHp("-", amount);
 	std::cout << "----------" << std::endl;
@@ -90,7 +90,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	std::cout << GREEN << "[BE REPAIRED]" << std::endl;
+	std::cout << GREEN << "[BE REPAIRED ❤️‍🩹❤️‍🩹❤️‍🩹]" << std::endl;
 	std::cout << "ClapTrap " << getName() << "'s Hit Points before being repaired: " << getHp() << std::endl;
 	std::cout << "ClapTrap " << getName() << "'s Energy Points before being repaired: " << getEp() << std::endl;
 	setEp("-");
@@ -123,6 +123,10 @@ void ClapTrap::setHp(std::string op, unsigned int amount)
 {
 	if (!op.compare("-"))
 	{
+		if (amount > getHp()) {
+			_hp = 0;
+			return ;
+		}
 		_hp -= amount;
 	}
 	else if (!op.compare("+"))

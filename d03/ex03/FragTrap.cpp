@@ -4,21 +4,19 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-FragTrap::FragTrap()
+FragTrap::FragTrap() : ClapTrap("default", HP_FT, EP_FT, AD_FT)
 {
-	std::cout << BLUE << "Default constructor called for FragTrap" << RESET << std::endl;
-	ClapTrap("Default", 100, 100, 30);
+	std::cout << BLUE << "FragTrap default constructor called" << RESET << std::endl;
 }
 
-FragTrap::FragTrap(std::string name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30)
 {
-	std::cout << BLUE << "Name constructor called for FragTrap" << RESET << std::endl;
-	ClapTrap(name, 100, 100, 30);
+	std::cout << BLUE << "FragTrap name constructor called" << RESET << std::endl;
 }
 
 FragTrap::FragTrap( const FragTrap & src ) : ClapTrap(src)
 {
-		std::cout << BLUE << "Copy constructor called for FragTrap" << RESET << std::endl;
+		std::cout << BLUE << "FragTrap Copy constructor called" << RESET << std::endl;
 }
 
 /*
@@ -27,7 +25,7 @@ FragTrap::FragTrap( const FragTrap & src ) : ClapTrap(src)
 
 FragTrap::~FragTrap()
 {
-	std::cout << BLUE << "Destructor called for ScavTrap" << RESET << std::endl;
+	std::cout << BLUE << "FragTrap Destructor called" << RESET << std::endl;
 }
 
 
@@ -39,10 +37,7 @@ FragTrap &				FragTrap::operator=( FragTrap const & rhs )
 {
 	if ( this != &rhs )
 	{
-		this->_name = rhs.getName();
-		this->_hp = rhs.getHp();
-		this->_ep = rhs.getEp();
-		this->_ad = rhs.getAd();
+		ClapTrap::operator=(rhs);
 	}
 	return *this;
 }
@@ -61,7 +56,7 @@ std::ostream &			operator<<( std::ostream & o, FragTrap const & i )
 int		FragTrap::checkDeath()
 {
 	if (!getHp() || !getEp()) {
-		std::cout << BLUE << "[GAME OVER]" << std::endl;
+		std::cout << BLUE << "[GAME OVER 💀💀💀]" << std::endl;
 		std::cout << "FragTrap " << getName() << " lost!" << RESET << std::endl;
 		return 1;
 	}
@@ -70,40 +65,28 @@ int		FragTrap::checkDeath()
 
 void	FragTrap::attack(const std::string &target)
 {
-	FragTrap	the_target(target);
-
 	setEp("-");
-	std::cout << BLUE << "[ATTAAAAACK!!!]" << std::endl;
-	if (_amount < 2) {
-		std::cout << "FragTrap " << _name << " attacks " << the_target.getName() << " , causing " << _amount << " point of damage!" << RESET << std::endl;
+	std::cout << BLUE << "[ATTAAAAACK!!! 💥💥💥]" << std::endl;
+	if (getAd() < 2) {
+		std::cout << "FragTrap " << _name << " attacks " << target << " , causing " << getAd() << " point of damage!" << RESET << std::endl;
 	}
 	else {
-		std::cout << "FragTrap " << _name << " attacks " << the_target.getName() << " , causing " << _amount << " points of damage!" << RESET << std::endl;
-	}
-	the_target.takeDamage(_amount);
-	if (checkDeath()) {
-		return ;
+		std::cout << "FragTrap " << _name << " attacks " << target << " , causing " << getAd() << " points of damage!" << RESET << std::endl;
 	}
 }
 
 void	FragTrap::takeDamage(unsigned int amount)
 {
-	std::cout << BLUE <<"[TAKE DAMAGE]" << std::endl;
+	std::cout << BLUE <<"[TAKE DAMAGE 🤕🤕🤕]" << std::endl;
 	std::cout << "FragTrap " << getName() << "'s Hit Points before damage: " << getHp() << std::endl;
-	std::cout << "FragTrap " << getName() << "'s Attack Damage before damage: " << getAd() << std::endl;
-	setAd("+", amount);
 	setHp("-", amount);
 	std::cout << "----------" << std::endl;
-	std::cout << "FragTrap " << getName() << "'s Hit points after damage: " << getHp() << std::endl;
-	std::cout << "FragTrap " << getName() << "'s Attack damage after damage: " << getAd() << RESET << std::endl;
-	if (checkDeath()) {
-		return ;
-	}
+	std::cout << "FragTrap " << getName() << "'s Hit points after damage: " << getHp() << RESET << std::endl;
 }
 
 void	FragTrap::beRepaired(unsigned int amount)
 {
-	std::cout << BLUE << "[BE REPAIRED]" << std::endl;
+	std::cout << BLUE << "[BE REPAIRED ❤️‍🩹❤️‍🩹❤️‍🩹]" << std::endl;
 	std::cout << "ScavTrap " << getName() << "'s Hit Points before being repaired: " << getHp() << std::endl;
 	std::cout << "ScavTrap " << getName() << "'s Energy Points before being repaired: " << getEp() << std::endl;
 	setEp("-");
@@ -111,19 +94,35 @@ void	FragTrap::beRepaired(unsigned int amount)
 	std::cout << "----------" << std::endl;
 	std::cout << "ScavTrap " << getName() << "'s Hit Points after being repaired: " << getHp() << std::endl;
 	std::cout << "ScavTrap " << getName() << "'s Energy Points after being repaired: " << getEp() << RESET << std::endl;
-	if (checkDeath()) {
-		return ;
-	}
 }
 
 void	FragTrap::highFivesGuys()
 {
-	std::cout << BLUE << "🙌" << RESET << std::endl;
+	std::cout << BLUE << "FragTrap High Five guys!! 🙌🙌🙌" << RESET << std::endl;
 }
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
+
+void FragTrap::setHp(std::string op, unsigned int amount)
+{
+	if (!op.compare("-"))
+	{
+		if (amount > getHp()) {
+			_hp = 0;
+			return ;
+		}
+		_hp -= amount;
+	}
+	else if (!op.compare("+"))
+	{
+		if (_hp < HP_FT) {
+			_hp += amount;
+		}
+	}
+	return;
+}
 
 
 /* ************************************************************************** */
