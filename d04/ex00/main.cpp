@@ -3,9 +3,11 @@
 
 int main()
 {
-	Dog dog;
-	Cat cat;
+	Animal	animal;
+	Dog		dog;
+	Cat		cat;
 
+	animal.makeSound();
 	dog.makeSound();
 	cat.makeSound();
 

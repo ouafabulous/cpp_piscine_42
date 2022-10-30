@@ -2,11 +2,15 @@ CC = c++
 FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
 SRCS = main.cpp \
 		Animal.cpp \
+		WrongAnimal.cpp \
 		Dog.cpp \
-		Cat.cpp
+		Cat.cpp \
+		WrongCat.cpp
 HEADERS = Animal.hpp \
+		WrongAnimal.hpp \
 		Dog.hpp \
-		Cat.hpp
+		Cat.hpp \
+		WrongCat.hpp
 OBJS = $(SRCS:%.cpp=%.o)
 NAME = fucking_animals
 

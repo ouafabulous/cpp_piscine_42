@@ -1,18 +1,18 @@
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Animal::Animal()
+WrongAnimal::WrongAnimal()
 {
-	std::cout << GREEN << "Animal's default constructor called" << RESET << std::endl;
+	std::cout << GREEN << "WrongAnimal's default constructor called" << RESET << std::endl;
 	this->_type = "Default";
 }
 
-Animal::Animal( const Animal & src )
+WrongAnimal::WrongAnimal( const WrongAnimal & src )
 {
-	std::cout << GREEN << "Animal's copy constructor called" << RESET << std::endl;
+	std::cout << GREEN << "WrongAnimal's copy constructor called" << RESET << std::endl;
 	*this = src;
 }
 
@@ -21,9 +21,9 @@ Animal::Animal( const Animal & src )
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-	std::cout << GREEN << "Animal's destructor called" << RESET << std::endl;
+	std::cout << GREEN << "WrongAnimal's destructor called" << RESET << std::endl;
 }
 
 
@@ -31,7 +31,7 @@ Animal::~Animal()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Animal &				Animal::operator=( Animal const & rhs )
+WrongAnimal &				WrongAnimal::operator=( WrongAnimal const & rhs )
 {
 	if ( this != &rhs )
 	{
@@ -40,7 +40,7 @@ Animal &				Animal::operator=( Animal const & rhs )
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, Animal const & i )
+std::ostream &			operator<<( std::ostream & o, WrongAnimal const & i )
 {
 	o << GREEN << i.getType() << RESET << std::endl;
 	return o;
@@ -51,7 +51,7 @@ std::ostream &			operator<<( std::ostream & o, Animal const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void				Animal::makeSound() const
+void				WrongAnimal::makeSound() const
 {
 	std::cout << GREEN << "If you don't specify which animal I am, I cannot make any sound" << RESET << std::endl;
 }
@@ -60,12 +60,12 @@ void				Animal::makeSound() const
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-std::string				Animal::getType() const
+std::string				WrongAnimal::getType() const
 {
 	return (this->_type);
 }
 
-void					Animal::setType(std::string type)
+void					WrongAnimal::setType(std::string type)
 {
 	_type = type;
 }

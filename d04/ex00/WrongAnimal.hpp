@@ -1,5 +1,5 @@
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WORNGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
 # include <iostream>
 # include <string>
@@ -12,21 +12,21 @@
 # define GREEN   "\033[1m\033[32m"
 # define YELLOW_NEG "\033[33;7"
 
-class Animal
+class WrongAnimal
 {
 
 	public:
 
-		Animal();
-		Animal( Animal const & src );
-		virtual ~Animal();
+		WrongAnimal();
+		WrongAnimal( WrongAnimal const & src );
+		virtual ~WrongAnimal();
 
-		Animal &				operator=( Animal const & rhs );
+		WrongAnimal &				operator=( WrongAnimal const & rhs );
 
-		virtual std::string		getType() const;
+		std::string				getType() const;
 		void					setType(std::string type);
 
-		virtual void			makeSound() const;
+		void					makeSound() const;
 
 	protected:
 
@@ -34,6 +34,6 @@ class Animal
 
 };
 
-std::ostream &			operator<<( std::ostream & o, Animal const & i );
+std::ostream &			operator<<( std::ostream & o, WrongAnimal const & i );
 
 #endif /* ********************************************************** ANIMAL_H */
