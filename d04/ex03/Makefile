@@ -1,18 +1,13 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
 SRCS = main.cpp \
-		AAnimal.cpp \
-		WrongAAnimal.cpp \
-		Dog.cpp \
-		Cat.cpp \
-		WrongCat.cpp \
-		Brain.cpp
+		AMateria.cpp \
+		Ice.cpp \
+		Cure.cpp
 HEADERS = AAnimal.hpp \
-		WrongAAnimal.hpp \
-		Dog.hpp \
-		Cat.hpp \
-		WrongCat.hpp \
-		Brain.hpp
+		AMateria.hpp \
+		Ice.hpp \
+		Cure.hpp
 OBJS = $(SRCS:%.cpp=%.o)
 NAME = abstract_class
 

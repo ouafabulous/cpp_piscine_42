@@ -4,14 +4,14 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Cat::Cat() : Animal()
+Cat::Cat() : AAnimal()
 {
 	std::cout << YELLOW << "Cat's default constructor called" << RESET << std::endl;
 	this->_type = "Cat";
 	_brain = new Brain;
 }
 
-Cat::Cat( const Cat & src ) : Animal(src)
+Cat::Cat( const Cat & src ) : AAnimal(src)
 {
 	std::cout << YELLOW << "Cat's copy constructor called" << RESET << std::endl;
 	_brain = new Brain(*src._brain);
@@ -37,7 +37,7 @@ Cat &				Cat::operator=( Cat const & rhs )
 {
 	if ( this != &rhs )
 	{
-		Animal::operator=(rhs);
+		AAnimal::operator=(rhs);
 		_brain = new Brain(*rhs._brain);
 	}
 	return *this;

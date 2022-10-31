@@ -4,14 +4,14 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Dog::Dog() : Animal()
+Dog::Dog() : AAnimal()
 {
 	std::cout << MAGENTA << "Dog's default constructor called" << RESET << std::endl;
 	this->_type = "Dog";
 	_brain = new Brain;
 }
 
-Dog::Dog( const Dog & src ) : Animal(src)
+Dog::Dog( const Dog & src ) : AAnimal(src)
 {
 	std::cout << MAGENTA << "Dog's copy constructor called" << RESET << std::endl;
 	_brain = new Brain(*src._brain);
@@ -37,7 +37,7 @@ Dog &				Dog::operator=( Dog const & rhs )
 {
 	if ( this != &rhs )
 	{
-		Animal::operator=(rhs);
+		AAnimal::operator=(rhs);
 		_brain = new Brain(*rhs._brain);
 	}
 	return *this;

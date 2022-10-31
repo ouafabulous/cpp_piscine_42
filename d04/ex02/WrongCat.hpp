@@ -4,9 +4,9 @@
 # include <iostream>
 # include <string>
 
-# include "WrongAnimal.hpp"
+# include "WrongAAnimal.hpp"
 
-class WrongCat : public virtual WrongAnimal
+class WrongCat : public virtual WrongAAnimal
 {
 
 	public:

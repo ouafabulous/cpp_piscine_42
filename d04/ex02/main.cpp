@@ -4,19 +4,9 @@
 int main()
 {
 
-	// Cat	*i_1 = new Cat();
+	// AAnimal	test;
 
-	// i_1->setIdea("I love my master", 0);
-	// Cat	*i_2 = new Cat(*i_1);
-
-	// delete i_1;
-	// std::cout << "I'm the idea issued from the deep copy, and here I am: " << i_2->getIdea(0) << std::endl;
-
-	// delete i_2;
-
-	// Animal	test;
-
-	Animal	*dogs_and_cats[10];
+	AAnimal	*dogs_and_cats[10];
 	for (int i = 0; i != 10; i++) {
 		if (i % 2) {
 			dogs_and_cats[i] = new Cat();

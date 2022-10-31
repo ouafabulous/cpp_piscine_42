@@ -4,10 +4,10 @@
 # include <iostream>
 # include <string>
 
-# include "Animal.hpp"
+# include "AAnimal.hpp"
 # include "Brain.hpp"
 
-class Cat : public virtual Animal
+class Cat : public virtual AAnimal
 {
 
 	public:
