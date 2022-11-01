@@ -88,7 +88,7 @@ void Character::equip(AMateria *m)
 	}
 }
 
-void Character::unequip(int idx)
+void		Character::unequip(int idx)
 {
 	if (idx < 4 and idx >= 0)
 	{

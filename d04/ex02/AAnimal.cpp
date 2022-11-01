@@ -51,11 +51,6 @@ std::ostream &			operator<<( std::ostream & o, AAnimal const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void				AAnimal::makeSound() const
-{
-	std::cout << GREEN << "If you don't specify which animal I am, I cannot make any sound" << RESET << std::endl;
-}
-
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
@@ -63,6 +58,11 @@ void				AAnimal::makeSound() const
 void					AAnimal::setType(std::string type)
 {
 	_type = type;
+}
+
+std::string				AAnimal::getType() const
+{
+	return (_type);
 }
 
 void					AAnimal::setIdea(std::string idea, unsigned int i)

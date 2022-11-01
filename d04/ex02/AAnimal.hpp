@@ -23,10 +23,10 @@ class AAnimal
 
 		AAnimal &				operator=( AAnimal const & rhs );
 
-		virtual std::string		getType() const = 0;
+		virtual std::string		getType() const;
 		void					setType(std::string type);
 
-		virtual void			makeSound() const;
+		virtual void			makeSound() const = 0;
 
 		void			setIdea(std::string idea, unsigned int i);
 		virtual std::string		getIdea(unsigned int i) const;

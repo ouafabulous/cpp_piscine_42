@@ -14,10 +14,10 @@ NAME = materias
 all: $(NAME)
 
 %.o: %.cpp
-	$(CC) $(FLAGS) -MMD -c $< -o $@
+	@$(CC) $(FLAGS) -MMD -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $^ -o $(NAME)
+	@$(CC) $(FLAGS) $^ -o $(NAME)
 clean:
 	@rm -rf $(OBJS) $(DEPS)
 

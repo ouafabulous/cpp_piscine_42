@@ -40,13 +40,6 @@ AMateria &				AMateria::operator=( AMateria const & rhs )
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, AMateria const & i )
-{
-	o << "Type = " << i.getType();
-	return o;
-}
-
-
 /*
 ** --------------------------------- METHODS ----------------------------------
 */

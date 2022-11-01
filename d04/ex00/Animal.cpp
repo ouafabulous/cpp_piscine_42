@@ -19,6 +19,7 @@ Animal::Animal( const Animal & src )
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
+
 */
 
 Animal::~Animal()

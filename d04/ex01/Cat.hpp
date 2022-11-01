@@ -27,8 +27,8 @@ class Cat : public virtual Animal
 
 	private:
 
-		std::string	_type;
-		Brain		*_brain;
+		std::string		_type;
+		Brain			*_brain;
 
 };
 

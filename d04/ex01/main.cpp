@@ -27,6 +27,13 @@ int main()
 			delete dogs_and_cats[i];
 	}
 
+	// Dog basic;
+	// {
+	// 	Dog tmp;
+	// 	tmp.setIdea("Jadore le CPP", 0);
+	// 	basic = tmp;
+	// }
+	// std::cout << basic.getIdea(0) << std::endl;
 
 	return 0;
 }
