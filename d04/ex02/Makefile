@@ -18,7 +18,7 @@ NAME = abstract_class
 
 all: $(NAME)
 
-%.o: %.cpp $(HEADERS)
+%.o: %.cpp
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

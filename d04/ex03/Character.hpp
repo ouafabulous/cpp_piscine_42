@@ -7,7 +7,7 @@
 # include "Cure.hpp"
 # include <typeinfo>
 
-class Character
+class Character : public ICharacter
 {
 
 	public:

@@ -51,6 +51,10 @@ std::ostream &			operator<<( std::ostream & o, AMateria const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
+void		AMateria::use(ICharacter &target)
+{
+	(void)target;
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

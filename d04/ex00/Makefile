@@ -16,7 +16,7 @@ NAME = fucking_animals
 
 all: $(NAME)
 
-%.o: %.cpp $(HEADERS)
+%.o: %.cpp
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

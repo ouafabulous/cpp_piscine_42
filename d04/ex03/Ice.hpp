@@ -2,7 +2,7 @@
 # define ICE_HPP
 
 # include "AMateria.hpp"
-# include "ICharacter.hpp"
+# include "Ice.hpp"
 
 class Ice : public AMateria
 {
@@ -16,6 +16,7 @@ class Ice : public AMateria
 		Ice&		operator=( Ice const & rhs );
 
 		AMateria*	clone() const;
+		void use(ICharacter &target);
 
 	private:
 

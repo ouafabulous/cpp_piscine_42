@@ -7,22 +7,25 @@
 Character::Character()
 {
 	_name = "Default";
-	for (int i = 0; i != 4; i++) {
+	for (int i = 0; i != 4; i++)
+	{
 		_inventory[i] = NULL;
 	}
 }
 
-Character::Character(std::string name): Character()
+Character::Character(std::string name) //: Character()
 {
+	for (int i = 0; i != 4; i++)
+	{
+		_inventory[i] = NULL;
+	}
 	_name = name;
 }
 
-
-Character::Character( const Character & src )
+Character::Character(const Character &src)
 {
 	*this = src;
 }
-
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -30,72 +33,80 @@ Character::Character( const Character & src )
 
 Character::~Character()
 {
-	for (int i = 0; i != 4; i++) {
-		if (_inventory[i]) {
+	for (int i = 0; i != 4; i++)
+	{
+		if (_inventory[i])
+		{
 			delete _inventory[i];
 		}
 	}
-	delete	_inventory;
 }
-
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Character &				Character::operator=( Character const & rhs )
+Character &Character::operator=(Character const &rhs)
 {
-	if ( this != &rhs )
+	if (this != &rhs)
 	{
+		// this->~Character();
+		// this->Character(rhs._name);
 		_name = rhs._name;
-		for (int i = 0; i != 4; i++) {
-				delete(_inventory[i]);
-				_inventory[i] = rhs._inventory[i]->clone();
+		for (int i = 0; i != 4; i++)
+		{
+			if (!rhs._inventory[i])
+			{
+				return *this;
 			}
+			delete _inventory[i];
+			_inventory[i] = rhs._inventory[i]->clone();
+		}
 	}
 	return *this;
 }
 
-std::ostream &			operator<<( std::ostream & o, Character const & i )
+std::ostream &operator<<(std::ostream &o, Character const &i)
 {
 	o << "Name = " << i.getName();
 	return o;
 }
 
-
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void					Character::equip(AMateria *m)
+void Character::equip(AMateria *m)
 {
-	for (int i = 0; i != 4; i++){
-		if (!_inventory[i]) {
+	for (int i = 0; i != 4; i++)
+	{
+		if (!_inventory[i])
+		{
 			_inventory[i] = m;
+			return;
 		}
 	}
 }
 
-void					Character::unequip(int idx)
+void Character::unequip(int idx)
 {
-	if (idx < 4 and idx >= 0) {
-		for (size_t i = 0; i != 4; i++)
+	if (idx < 4 and idx >= 0)
+	{
+		for (int i = 0; i != 4; i++)
 		{
-			if (i == idx) {
+			if (i == idx)
+			{
 				_inventory[i] = NULL;
 			}
 		}
 	}
 }
 
-void				Character::use(int idx, ICharacter &target)
+void Character::use(int idx, ICharacter &target)
 {
-	if (idx < 4 && and idx >= 0) {
-		for (size_t i = 0; i != 4; i++) {
-			if (i == idx) {
-				AMateria::use(_inventory[idx]);
-			}
-		}
+	if (_inventory[idx])
+	{
+		_inventory[idx]->use(target);
 	}
 }
 
@@ -103,21 +114,22 @@ void				Character::use(int idx, ICharacter &target)
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-std::string const		&Character::getName() const
+std::string const &Character::getName() const
 {
-	return(_name);
+	return (_name);
 }
 
-AMateria				*Character::getInventory(unsigned int i)
+AMateria *Character::getInventory(unsigned int i)
 {
-	if (!_inventory[i]->getType().compare("ice")) {
+	if (!_inventory[i]->getType().compare("ice"))
+	{
 		return ((Ice *)_inventory[i]);
 	}
-	else {
+	else
+	{
 		return ((Cure *)_inventory[i]);
 	}
 	return (NULL);
 }
-
 
 /* ************************************************************************** */
