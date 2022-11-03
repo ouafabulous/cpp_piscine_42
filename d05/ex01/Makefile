@@ -1,7 +1,8 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
 SRCS = main.cpp \
-		Bureaucrat.cpp
+		Bureaucrat.cpp \
+		Form.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 DEPS = $(SRCS:%.cpp=%.d)

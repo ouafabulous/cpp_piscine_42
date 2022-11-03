@@ -9,7 +9,9 @@ class Form;
 
 # define GREEN   "\033[1m\033[32m"
 # define RED     "\033[1m\033[31m"
+# define YELLOW  "\033[1m\033[33m"
 # define RESET   "\033[0m"
+# define BLUE    "\033[1m\033[34m"
 
 class Bureaucrat
 {
@@ -27,7 +29,7 @@ class Bureaucrat
 			public:
 				virtual const char* what() const throw()
 				{
-					return ("This grade is too high. It will be set arbitrarily to 0.\nReminder: Grade should range between 1 and 150.");
+					return ("This grade is too high.\nReminder: Grade should range between 1 and 150.");
 				}
 		};
 		class GradeTooLowException : public std::exception
@@ -35,7 +37,7 @@ class Bureaucrat
 			public:
 				virtual const char* what() const throw()
 				{
-					return ("This grade is too low. It will be set arbitrarily to 0.\nReminder: Grade should range between 1 and 150.");
+					return ("This grade is too low.\nReminder: Grade should range between 1 and 150.");
 				}
 		};
 

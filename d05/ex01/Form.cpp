@@ -8,8 +8,9 @@ Form::Form() : _name("Default"), _signed(false), _gradeToSign(0), _gradeToExecut
 {
 }
 
-Form::Form(std::string name, bool signedB, int gradeToSign, int gradeToExecute) : _name(name), _signed(signedB)
+Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name)
 {
+	setSigned(0);
 	setGradeToSign(gradeToSign);
 	setGradeToExecute(gradeToExecute);
 }
@@ -48,7 +49,7 @@ Form &				Form::operator=( Form const & rhs )
 
 std::ostream &			operator<<( std::ostream & o, Form const & i )
 {
-	o << "Form info: name(" << i.getName() << "); signed(" << i.getSigned() << "); gradeToSign(" << i.getGradeToSign() << "); gradeToExecute(" >> i.getGradeToExecute() >> ")" << std::endl;
+	o << YELLOW << "Form info: name(" << i.getName() << "); signed(" << i.getSigned() << "); gradeToSign(" << i.getGradeToSign() << "); gradeToExecute(" << i.getGradeToExecute() << ")" << RESET << std::endl;
 	return o;
 }
 
@@ -81,7 +82,7 @@ void				Form::setSigned(bool signedB)
 	_signed = signedB;
 }
 
-void				Form::setGradeTool(int value)
+void				Form::setGradeToSign(int value)
 {
 		if (value < 1)
 		{
@@ -99,22 +100,18 @@ void				Form::setGradeTool(int value)
 
 void				Form::setGradeToExecute(int value)
 {
-	try
-	{
-		setGradeTool(value);
-	}
-	catch (const Bureaucrat::GradeTooHighException &e)
-	{
-			std::cerr << "[GRADE TO EXECUTE ERROR]" << std::endl;
-			_gradeToExecute = 0;
-			std::cerr << RED << e.what() << RESET << '\n';
-	}
-	catch (const Bureaucrat::GradeTooLowException &e)
-	{
-			std::cerr << "[GRADE TO EXECUTE ERROR]" << std::endl;
-			_gradeToExecute = 0;
-			std::cerr << RED << e.what() << RESET << '\n';
-	}
+		if (value < 1)
+		{
+			throw Bureaucrat::GradeTooHighException();
+		}
+		else if (value > 150)
+		{
+			throw Bureaucrat::GradeTooLowException();
+		}
+		else
+		{
+				_gradeToExecute = value;
+		}
 }
 
 std::string const	&Form::getName() const
@@ -122,7 +119,7 @@ std::string const	&Form::getName() const
 	return (_name);
 }
 
-std::string const	&Form::getSigned() const
+std::string const	Form::getSigned() const
 {
 	if (_signed) {
 		return ("oui");

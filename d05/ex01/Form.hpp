@@ -16,11 +16,9 @@ class Form
 	public:
 
 		Form();
-		Form(std::string name, bool signedB, int gradeToSign, int gradeToExecute);
+		Form(std::string name, int gradeToSign, int gradeToExecute);
 		Form( Form const & src );
 		~Form();
-		// using Bureaucrat::GradeTooHighException {};
-		class GradeTooLowException : Bureaucrat::GradeTooLowException {};
 
 		Form &				operator=( Form const & rhs );
 
@@ -31,7 +29,7 @@ class Form
 		void				setGradeToExecute(int grade);
 
 		std::string const	&getName() const;
-		std::string const	&getSigned() const;
+		std::string const	getSigned() const;
 		int const			&getGradeToSign() const;
 		int const			&getGradeToExecute() const;
 
