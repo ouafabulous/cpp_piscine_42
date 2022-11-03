@@ -18,6 +18,8 @@ public:
 
 	RobotomyRequestForm &operator=(RobotomyRequestForm const &rhs);
 
+	Form				*clone(std::string const &target) const;
+
 	void execute(Bureaucrat const &executor) const;
 
 private:

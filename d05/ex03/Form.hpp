@@ -49,6 +49,8 @@ class Form
 		virtual void		beSigned(const Bureaucrat &Bureaucrat);
 		virtual void		execute(Bureaucrat const & executor) const = 0;
 
+		virtual Form		*clone(std::string const  &newTarget) const = 0;
+
 	private:
 
 		const std::string	_name;

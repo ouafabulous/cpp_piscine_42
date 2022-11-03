@@ -14,9 +14,12 @@ public:
 	PresidentialPardonForm(const PresidentialPardonForm &src);
 	~PresidentialPardonForm();
 
-	PresidentialPardonForm &operator=(PresidentialPardonForm const &rhs);
+	PresidentialPardonForm	&operator=(PresidentialPardonForm const &rhs);
+
+	Form					*clone(std::string const & target) const;
 
 	void execute(Bureaucrat const &executor) const;
+
 
 private:
 };

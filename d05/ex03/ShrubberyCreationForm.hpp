@@ -26,7 +26,9 @@ class ShrubberyCreationForm : public Form
 				}
 		};
 
-		ShrubberyCreationForm &		operator=( ShrubberyCreationForm const & rhs);
+		ShrubberyCreationForm &	operator=( ShrubberyCreationForm const & rhs);
+
+		Form					*clone(std::string const &target) const;
 
 		void		execute(Bureaucrat const & executor) const;
 

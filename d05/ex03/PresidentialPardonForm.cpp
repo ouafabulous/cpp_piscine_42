@@ -42,7 +42,7 @@ std::ostream &operator<<(std::ostream &o, PresidentialPardonForm const &i)
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void PresidentialPardonForm::execute(const Bureaucrat &target) const
+void			PresidentialPardonForm::execute(const Bureaucrat &target) const
 {
 	if (this->getSigned().compare("oui"))
 	{
@@ -55,6 +55,13 @@ void PresidentialPardonForm::execute(const Bureaucrat &target) const
 	else {
 		std::cout << target.getName() << "was pardonned by the almighty Zaphod Beeblebrox." << std::endl;
 	}
+}
+
+Form			*PresidentialPardonForm::clone(std::string const &newTarget) const
+{
+	Form	*newForm = new PresidentialPardonForm(newTarget);
+
+	return (newForm);
 }
 
 /*

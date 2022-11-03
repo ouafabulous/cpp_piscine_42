@@ -5,11 +5,12 @@ SRCS = main.cpp \
 		Form.cpp \
 		PresidentialPardonForm.cpp \
 		RobotomyRequestForm.cpp \
-		ShrubberyCreationForm.cpp
+		ShrubberyCreationForm.cpp \
+		Intern.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 DEPS = $(SRCS:%.cpp=%.d)
-NAME = bureaucrat
+NAME = them_interns
 
 all: $(NAME)
 
