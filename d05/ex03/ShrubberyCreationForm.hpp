@@ -13,7 +13,7 @@ class ShrubberyCreationForm : public Form
 	public:
 
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(std::string target);
+		ShrubberyCreationForm(std::string &target);
 		ShrubberyCreationForm( const ShrubberyCreationForm & src );
 		~ShrubberyCreationForm();
 
@@ -28,7 +28,7 @@ class ShrubberyCreationForm : public Form
 
 		ShrubberyCreationForm &	operator=( ShrubberyCreationForm const & rhs);
 
-		Form					*clone(std::string const &target) const;
+		Form					*clone() const;
 
 		void		execute(Bureaucrat const & executor) const;
 

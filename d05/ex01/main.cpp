@@ -18,10 +18,10 @@ int main()
 		{
 			std::cout << RED << e.what() << RESET << std::endl;
 			try {
-				Bureaucrat	bob;
-				Form		form("visa", 15, 120);
-				bob.setName("Bob");
-				bob.setGrade(14);
+				// Bureaucrat	bob("bob", 150);
+				Bureaucrat	bob("bob", 1);
+				// Form		form("visa", 180, 120);
+				Form		form("visa", 14, 120);
 				std::cout << bob;
 				std::cout << form;
 				bob.signForm(form);

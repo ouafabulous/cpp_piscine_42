@@ -4,6 +4,9 @@
 # include <iostream>
 # include <string>
 # include "Form.hpp"
+# include "PresidentialPardonForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "ShrubberyCreationForm.hpp"
 
 class Intern
 {
@@ -27,7 +30,7 @@ class Intern
 		Form			*makeForm(std::string nameForm, std::string target);
 
 		void			learnForm(Form *f);
-		Form			*createForm(std::string const & type, std::string const & target);
+		Form			*createForm(std::string const & type);
 
 	private:
 		Form			*_formsLearnt[3];

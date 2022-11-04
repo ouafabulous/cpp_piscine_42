@@ -65,9 +65,9 @@ void RobotomyRequestForm::execute(const Bureaucrat &target) const
 	}
 }
 
-Form					*RobotomyRequestForm::clone(std::string const &newTarget) const
+Form					*RobotomyRequestForm::clone() const
 {
-	Form	*newForm = new RobotomyRequestForm(newTarget);
+	Form	*newForm = new RobotomyRequestForm;
 
 	return (newForm);
 }

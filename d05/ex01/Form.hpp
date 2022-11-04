@@ -37,10 +37,10 @@ class Form
 
 	private:
 
-		std::string			_name;
+		std::string const	_name;
 		bool				_signed;
-		int					_gradeToSign;
-		int					_gradeToExecute;
+		int const			_gradeToSign;
+		int const			_gradeToExecute;
 
 };
 

@@ -60,19 +60,19 @@ void				Intern::learnForm(Form* m)
 	for (int i = 0; i != 3; i++)
 	{
 		if (!_formsLearnt[i] && m) {
-			_formsLearnt[i] = m->clone("Default");
+			_formsLearnt[i] = m->clone();
 			delete m;
 			return ;
 		}
 	}
 }
 
-Form*				Intern::createForm(std::string const & nameForm, std::string const & target)
+Form*				Intern::createForm(std::string const & nameForm)
 {
 	for (int i = 0; i != 3; i++)
 	{
 		if (_formsLearnt[i] and !_formsLearnt[i]->getName().compare(nameForm)) {
-			return _formsLearnt[i]->clone(target);
+			return _formsLearnt[i]->clone();
 		}
 	}
 	return (NULL);
@@ -81,8 +81,9 @@ Form*				Intern::createForm(std::string const & nameForm, std::string const & ta
 Form					*Intern::makeForm(std::string nameForm, std::string target)
 {
 	Form	*newForm;
+	(void)target;
 
-	newForm = createForm(nameForm, target);
+	newForm = createForm(nameForm);
 	if (!newForm) {
 		throw Intern::ErrorFormName();
 	}

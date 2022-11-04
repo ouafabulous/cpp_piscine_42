@@ -4,31 +4,26 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 {
-	setName("Default");
-	setGrade(150);
 }
 
-Bureaucrat::Bureaucrat(int grade)
+Bureaucrat::Bureaucrat(int grade) : _name("Default")
 {
-	setName("Default");
 	setGrade(grade);
 }
 
-Bureaucrat::Bureaucrat(std::string name)
+Bureaucrat::Bureaucrat(std::string name) : _name(name)
 {
-	setName(name);
 	setGrade(150);
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
-	setName(name);
 	setGrade(grade);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src)
+Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name)
 {
 	*this = src;
 }
@@ -49,7 +44,6 @@ Bureaucrat &Bureaucrat::operator=(Bureaucrat const &rhs)
 {
 	if (this != &rhs)
 	{
-		this->_name = rhs.getName();
 		this->_grade = rhs.getGrade();
 	}
 	return *this;
@@ -82,11 +76,6 @@ void Bureaucrat::decrementGrade()
 std::string const &Bureaucrat::getName() const
 {
 	return (_name);
-}
-
-void Bureaucrat::setName(std::string name)
-{
-	_name = name;
 }
 
 int Bureaucrat::getGrade() const

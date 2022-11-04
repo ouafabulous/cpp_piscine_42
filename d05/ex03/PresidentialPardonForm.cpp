@@ -57,9 +57,9 @@ void			PresidentialPardonForm::execute(const Bureaucrat &target) const
 	}
 }
 
-Form			*PresidentialPardonForm::clone(std::string const &newTarget) const
+Form			*PresidentialPardonForm::clone() const
 {
-	Form	*newForm = new PresidentialPardonForm(newTarget);
+	Form	*newForm = new PresidentialPardonForm();
 
 	return (newForm);
 }

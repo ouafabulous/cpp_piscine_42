@@ -6,10 +6,11 @@ SRCS = main.cpp \
 		PresidentialPardonForm.cpp \
 		RobotomyRequestForm.cpp \
 		ShrubberyCreationForm.cpp
+SHRB = *_shruberry
 
 OBJS = $(SRCS:%.cpp=%.o)
 DEPS = $(SRCS:%.cpp=%.d)
-NAME = bureaucrat
+NAME = concreteforms
 
 all: $(NAME)
 
@@ -23,7 +24,7 @@ clean:
 	rm -rf $(OBJS) $(DEPS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(SHRB)
 
 re: fclean all
 

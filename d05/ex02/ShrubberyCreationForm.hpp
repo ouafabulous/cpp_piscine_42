@@ -32,7 +32,8 @@ class ShrubberyCreationForm : public Form
 
 	private:
 
-		static std::string	tree;
+		static std::string	_tree;
+		std::string			_target;
 
 };
 

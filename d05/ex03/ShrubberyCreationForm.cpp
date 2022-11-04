@@ -64,9 +64,9 @@ void					ShrubberyCreationForm::execute(const Bureaucrat &target) const
 		}
 }
 
-Form					*ShrubberyCreationForm::clone(std::string const &newTarget) const
+Form					*ShrubberyCreationForm::clone() const
 {
-	Form	*newForm = new ShrubberyCreationForm(newTarget);
+	Form	*newForm = new ShrubberyCreationForm;
 	return (newForm);
 }
 

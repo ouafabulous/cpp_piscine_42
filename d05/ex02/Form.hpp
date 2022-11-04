@@ -17,6 +17,7 @@ enum {
 	TOEXECUTE
 };
 
+#include <string>
 class Bureaucrat;
 
 class Form
@@ -47,7 +48,7 @@ class Form
 		int const			&getGradeToExecute() const;
 
 		virtual void		beSigned(const Bureaucrat &Bureaucrat);
-		virtual void		execute(Bureaucrat const & executor) const = 0;
+		virtual void		execute(Bureaucrat const & executor) const;
 
 	private:
 

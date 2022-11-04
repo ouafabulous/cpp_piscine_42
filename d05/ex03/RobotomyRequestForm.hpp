@@ -12,13 +12,13 @@ class RobotomyRequestForm : public Form
 
 public:
 	RobotomyRequestForm();
-	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(std::string &target);
 	RobotomyRequestForm(const RobotomyRequestForm &src);
 	~RobotomyRequestForm();
 
 	RobotomyRequestForm &operator=(RobotomyRequestForm const &rhs);
 
-	Form				*clone(std::string const &target) const;
+	Form				*clone() const;
 
 	void execute(Bureaucrat const &executor) const;
 

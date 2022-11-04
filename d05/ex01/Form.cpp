@@ -4,19 +4,26 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Form::Form() : _name("Default"), _signed(false), _gradeToSign(0), _gradeToExecute(0)
+Form::Form() : _name("Default"), _signed(false), _gradeToSign(150), _gradeToExecute(150)
 {
+	std::cout << "Default constructor called. gradeToExecute and gradeToSign are set 150." << std::endl;
 }
 
-Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name)
+Form::Form(std::string name, int gradeToSign, int gradeToExecute) : _name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
 	setSigned(0);
-	setGradeToSign(gradeToSign);
-	setGradeToExecute(gradeToExecute);
+	if (_gradeToSign < 1 || _gradeToExecute < 1)
+	{
+		throw Bureaucrat::GradeTooHighException();
+	}
+	else if (_gradeToSign > 150)
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
 }
 
 
-Form::Form( const Form & src )
+Form::Form( const Form & src ) : _name(src._name), _gradeToSign(src._gradeToSign), _gradeToExecute(src._gradeToExecute)
 {
 	*this = src;
 }
@@ -39,21 +46,16 @@ Form &				Form::operator=( Form const & rhs )
 {
 	if ( this != &rhs )
 	{
-		this->_name = rhs._name;
 		this->_signed = rhs._signed;
-		this->_gradeToSign = rhs._gradeToSign;
-		this->_gradeToExecute = rhs._gradeToExecute;
 	}
 	return *this;
 }
 
 std::ostream &			operator<<( std::ostream & o, Form const & i )
 {
-	o << YELLOW << "Form info: name(" << i.getName() << "); signed(" << i.getSigned() << "); gradeToSign(" << i.getGradeToSign() << "); gradeToExecute(" << i.getGradeToExecute() << ")" << RESET << std::endl;
-	return o;
+	o << YELLOW << "Form info: name(" << i.getName() << "); signed(" << i.getSigned() << "); gradeToSign(" << i.getGradeToSign() << "); (" << i.getGradeToExecute() << ")" << std::endl;
+	return (o);
 }
-
-
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
@@ -72,46 +74,9 @@ void				Form::beSigned(const Bureaucrat &bureaucrat)
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-void				Form::setName(std::string name)
-{
-	_name = name;
-}
-
 void				Form::setSigned(bool signedB)
 {
 	_signed = signedB;
-}
-
-void				Form::setGradeToSign(int value)
-{
-		if (value < 1)
-		{
-			throw Bureaucrat::GradeTooHighException();
-		}
-		else if (value > 150)
-		{
-			throw Bureaucrat::GradeTooLowException();
-		}
-		else
-		{
-				_gradeToSign = value;
-		}
-}
-
-void				Form::setGradeToExecute(int value)
-{
-		if (value < 1)
-		{
-			throw Bureaucrat::GradeTooHighException();
-		}
-		else if (value > 150)
-		{
-			throw Bureaucrat::GradeTooLowException();
-		}
-		else
-		{
-				_gradeToExecute = value;
-		}
 }
 
 std::string const	&Form::getName() const

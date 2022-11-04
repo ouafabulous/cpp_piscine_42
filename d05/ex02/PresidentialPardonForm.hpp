@@ -19,6 +19,8 @@ public:
 	void execute(Bureaucrat const &executor) const;
 
 private:
+
+	std::string				_target;
 };
 
 std::ostream &operator<<(std::ostream &o, PresidentialPardonForm const &i);

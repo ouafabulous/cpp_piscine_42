@@ -12,10 +12,9 @@ int main()
 		std::cout << RED<< e.what() << RESET << std::endl;
 		try
 		{
-			Bureaucrat bob;
-			bob.setName("Bob");
-			bob.setGrade(14);
-			std::cout << bob;
+			Bureaucrat bob("bob", 14);
+			Bureaucrat paula(bob);
+			std::cout << paula;
 		}
 		catch (const std::exception &e)
 		{
