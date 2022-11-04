@@ -8,6 +8,8 @@ SRCS = main.cpp \
 		ShrubberyCreationForm.cpp \
 		Intern.cpp
 
+SHRB = bob_shruberry
+
 OBJS = $(SRCS:%.cpp=%.o)
 DEPS = $(SRCS:%.cpp=%.d)
 NAME = them_interns
@@ -21,7 +23,7 @@ $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $^ -o $(NAME)
 
 clean:
-	rm -rf $(OBJS) $(DEPS)
+	rm -rf $(OBJS) $(DEPS) $(SHRB)
 
 fclean: clean
 	rm -rf $(NAME)

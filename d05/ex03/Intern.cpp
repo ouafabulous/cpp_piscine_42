@@ -61,7 +61,7 @@ void				Intern::learnForm(Form* m)
 	{
 		if (!_formsLearnt[i] && m) {
 			_formsLearnt[i] = m->clone();
-			delete m;
+			// delete m;
 			return ;
 		}
 	}
