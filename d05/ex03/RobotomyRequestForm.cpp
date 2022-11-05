@@ -6,6 +6,12 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : Form("RobotomyRequestForm", RRF_TOSIGN, RRF_TOEXECUTE)
 {
+	_target = "Default";
+}
+
+RobotomyRequestForm::RobotomyRequestForm(std::string target)
+{
+	_target = target;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : Form("RobotomyRequestForm", RRF_TOSIGN, RRF_TOEXECUTE)
@@ -44,24 +50,15 @@ std::ostream &operator<<(std::ostream &o, RobotomyRequestForm const &i)
 
 void RobotomyRequestForm::execute(const Bureaucrat &target) const
 {
-	if (this->getSigned().compare("oui"))
-	{
-		throw DocumentNotSigned();
-	}
-	else if (getGradeToExecute() < target.getGrade())
-	{
-		throw Bureaucrat::GradeTooLowException();
+	Form::execute(target);
+	std::cout << YELLOW << "[VROOM VROOM]" << std::endl;
+	srand(time(0));
+	int random = rand();
+	if (random % 2) {
+		std::cout << target.getName() << " has been succesfully robotomized." << RESET << std::endl;
 	}
 	else {
-		std::cout << "[VROOM VROOM]" << std::endl;
-		srand(time(0));
-		int random = rand();
-		if (random % 2) {
-			std::cout << target.getName() << " has been succesfully robotomized." << std::endl;
-		}
-		else {
-			std::cout << "Robotomisation of " << target.getName() << " failed." << std::endl;
-		}
+		std::cout << "Robotomisation of " << _target << " failed." << RESET << std::endl;
 	}
 }
 
@@ -71,6 +68,7 @@ Form					*RobotomyRequestForm::clone() const
 
 	return (newForm);
 }
+
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

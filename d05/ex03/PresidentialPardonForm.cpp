@@ -6,6 +6,12 @@
 
 PresidentialPardonForm::PresidentialPardonForm() : Form("PresidentialPardonForm", PPF_TOSIGN, PPF_TOEXECUTE)
 {
+	_target = "Default";
+}
+
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("PresidentialPardonForm", PPF_TOSIGN, PPF_TOEXECUTE)
+{
+	_target = target;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : Form("PresidentialPardonForm", PPF_TOSIGN, PPF_TOEXECUTE)
@@ -42,20 +48,12 @@ std::ostream &operator<<(std::ostream &o, PresidentialPardonForm const &i)
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void			PresidentialPardonForm::execute(const Bureaucrat &target) const
+void PresidentialPardonForm::execute(const Bureaucrat &target) const
 {
-	if (this->getSigned().compare("oui"))
-	{
-		throw DocumentNotSigned();
-	}
-	else if (getGradeToExecute() < target.getGrade())
-	{
-		throw Bureaucrat::GradeTooLowException();
-	}
-	else {
-		std::cout << target.getName() << "was pardonned by the almighty Zaphod Beeblebrox." << std::endl;
-	}
+	Form::execute(target);
+	std::cout << MAGENTA << _target << " was pardonned by the almighty Zaphod Beeblebrox." << RESET << std::endl;
 }
+
 
 Form			*PresidentialPardonForm::clone() const
 {

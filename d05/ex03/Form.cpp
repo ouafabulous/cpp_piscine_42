@@ -71,6 +71,17 @@ void				Form::beSigned(const Bureaucrat &bureaucrat)
 	}
 }
 
+void				Form::execute(const Bureaucrat &target) const
+{
+	if (this->getSigned().compare("oui"))
+	{
+		throw DocumentNotSigned();
+	}
+	else if (getGradeToExecute() < target.getGrade())
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
+}
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

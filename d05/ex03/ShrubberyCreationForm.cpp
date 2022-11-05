@@ -1,14 +1,19 @@
 #include "ShrubberyCreationForm.hpp"
 
-std::string	ShrubberyCreationForm::tree = "       _-_\n    /~~   ~~\\\n /~~         ~~\\\n{               }\n \\  _-     -_  /\n   ~  \\\\ //  ~\n_- -   | | _- _\n  _ -  | |   -_";
+std::string	ShrubberyCreationForm::_tree = "       _-_\n    /~~   ~~\\\n /~~         ~~\\\n{               }\n \\  _-     -_  /\n   ~  \\\\ //  ~\n_- -   | | _- _\n  _ -  | |   -_";
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
 ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", SCF_TOSIGN, SCF_TOEXECUTE)
 {
+	_target = "Default";
 }
 
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+{
+	_target = target;
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm & src ) : Form("ShrubberyCreationForm", SCF_TOSIGN, SCF_TOEXECUTE)
 {
@@ -49,19 +54,12 @@ std::ostream &			operator<<( std::ostream & o, ShrubberyCreationForm const & i )
 
 void					ShrubberyCreationForm::execute(const Bureaucrat &target) const
 {
-	if (this->getSigned().compare("oui")) {
-		throw DocumentNotSigned();
-	}
-	else if (getGradeToExecute() < target.getGrade()) {
-		throw Bureaucrat::GradeTooLowException();
-	}
-	else {
-		std::ofstream		ofs((target.getName()+"_shruberry").c_str());
+	Form::execute(target);
+	std::ofstream		ofs((_target+"_shruberry").c_str());
 		if (not ofs.good()) {
 			throw ErrorWhileCreatingFile();
 		}
-			ofs << GREEN << tree << RESET << std::endl;
-		}
+			ofs << GREEN << _tree << RESET << std::endl;
 }
 
 Form					*ShrubberyCreationForm::clone() const
@@ -69,6 +67,7 @@ Form					*ShrubberyCreationForm::clone() const
 	Form	*newForm = new ShrubberyCreationForm;
 	return (newForm);
 }
+
 
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
