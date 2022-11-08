@@ -91,7 +91,7 @@ void Bureaucrat::setGrade(int grade)
 	}
 	else if (grade > 150)
 	{
-		throw GradeTooHighException();
+		throw GradeTooLowException();
 	}
 	else
 	{

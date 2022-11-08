@@ -15,6 +15,14 @@ int main()
 			Bureaucrat bob("bob", 14);
 			Bureaucrat paula(bob);
 			std::cout << paula;
+			paula.incrementGrade();
+			std::cout << "-----------" << std::endl;
+			std::cout << paula;
+			Bureaucrat loser("loser", 150);
+			std::cout << loser;
+			loser.decrementGrade();
+			std::cout << "-----------" << std::endl;
+			std::cout << loser;
 		}
 		catch (const std::exception &e)
 		{

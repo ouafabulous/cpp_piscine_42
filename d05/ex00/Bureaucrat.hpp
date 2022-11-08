@@ -27,7 +27,7 @@ class Bureaucrat
 					return ("This grade is too high.\nReminder: Grade should range between 1 and 150.");
 				}
 		};
-		class GradeTooLowException
+		class GradeTooLowException : public std::exception
 		{
 			public:
 				virtual const char* what() const throw()
