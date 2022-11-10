@@ -12,10 +12,12 @@
 
 int check_negative(const char *av1)
 {
-    while (*av1 == ' ' || *av1 == '\f') {
+    while (*av1 == ' ' || *av1 == '\f')
+    {
         av1++;
     }
-    if (*av1 == '-') {
+    if (*av1 == '-')
+    {
         return (1);
     }
     return (0);
@@ -36,28 +38,33 @@ int main(int argc, char const *argv[])
         double my_double;
         char *pEnd = (char *)argv[1];
 
-
         my_double = strtod(argv[1], &pEnd);
-        if (pEnd == argv[1]) {
+        if (pEnd == argv[1])
+        {
             std::string pEnd_str;
-            std::istringstream  iss(pEnd);
+            std::istringstream iss(pEnd);
             iss >> std::ws >> pEnd_str;
-            if (pEnd_str.length() == 1) {
+            if (pEnd_str.length() == 1)
+            {
                 my_double = static_cast<double>(pEnd_str[0]);
             }
-            else {
+            else
+            {
                 std::cout << ERROR_MSG;
                 return (1);
             }
         }
-        else {
-            while (*pEnd == ' ' || *pEnd == '\t') {
+        else
+        {
+            while (*pEnd == ' ' || *pEnd == '\t')
+            {
                 pEnd++;
             }
             std::string pEnd_str(pEnd);
-            if (pEnd_str.length() > 1 || (pEnd_str[0] != '\0' && pEnd_str[0] != 'f')) {
+            if (pEnd_str.length() > 1 || (pEnd_str[0] != '\0' && pEnd_str[0] != 'f'))
+            {
                 std::cout << ERROR_MSG;
-                return(1);
+                return (1);
             }
         }
         my_float = static_cast<float>(my_double);
@@ -76,13 +83,16 @@ int main(int argc, char const *argv[])
             my_char += temp_char;
         }
         std::cout << "Char: " << my_char << std::endl;
-        if (std::isnan(my_double)) {
-            std::cout << "Int: " << "Impossible" << std::endl;
+        if (std::isnan(my_double))
+        {
+            std::cout << "Int: "
+                      << "Impossible" << std::endl;
         }
-        else {
+        else
+        {
             std::cout << "Int: " << my_int << std::endl;
         }
-        std::cout << std::fixed << "Float: "<< std::setprecision(1) << my_float << "f" << std::endl;
+        std::cout << std::fixed << "Float: " << std::setprecision(1) << my_float << "f" << std::endl;
         std::cout << "Double: " << my_double << std::endl;
     }
     return 0;
