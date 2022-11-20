@@ -11,6 +11,8 @@ void identify(Base *p)
         std::cout << *pB;
     else if (C *pC = dynamic_cast<C *>(p))
         std::cout << *pC;
+    else
+        std::cout << "NULL" << std::endl;
 }
 
 void identify(Base &p)
@@ -36,6 +38,7 @@ void identify(Base &p)
             }
             catch (const std::exception &e)
             {
+                std::cout << "NULL" << std::endl;
             }
         }
     }

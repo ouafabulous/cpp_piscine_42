@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     {
         int my_int;
         float my_float;
-        char temp_char;
+        std::string temp_char;
         std::string my_char;
         double my_double;
         char *pEnd = (char *)argv[1];
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
         my_int = static_cast<int>(my_double);
         if (my_int > 127 || my_int < 0)
         {
-            my_char = "Impossible";
+            my_char = "impossible";
         }
         else if (my_int >= 0 && my_int <= 31)
         {
@@ -79,21 +79,23 @@ int main(int argc, char const *argv[])
         }
         else
         {
-            temp_char = my_int;
+            temp_char = "'";
+            temp_char += my_int;
             my_char += temp_char;
+            my_char += "'";
         }
-        std::cout << "Char: " << my_char << std::endl;
+        std::cout << "char: " << my_char << std::endl;
         if (std::isnan(my_double))
         {
-            std::cout << "Int: "
-                      << "Impossible" << std::endl;
+            std::cout << "int: "
+                      << "impossible" << std::endl;
         }
         else
         {
-            std::cout << "Int: " << my_int << std::endl;
+            std::cout << "int: " << my_int << std::endl;
         }
-        std::cout << std::fixed << "Float: " << std::setprecision(1) << my_float << "f" << std::endl;
-        std::cout << "Double: " << my_double << std::endl;
+        std::cout << std::fixed << "float: " << std::setprecision(1) << my_float << "f" << std::endl;
+        std::cout << "double: " << my_double << std::endl;
     }
     return 0;
 }
