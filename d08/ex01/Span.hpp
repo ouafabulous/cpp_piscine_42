@@ -30,7 +30,7 @@ class Span
 			public :
 				virtual const char * what() const throw()
 				{
-					return ("Span has got less or equal to one elemen. Can't find shortest/longest span!\n");
+					return ("Span has got less or equal to one element. Can't find shortest/longest span!\n");
 				}
 		};
 
