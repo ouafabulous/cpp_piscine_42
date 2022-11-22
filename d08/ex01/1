@@ -4,9 +4,9 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Span::Span() {}
+Span::Span() {};
 
-Span::Span(unsigned int N) : _max_to_store(N) {}
+Span::Span(unsigned int N) : _max_to_store(N) {};
 
 Span::Span( const Span & src )
 {
@@ -69,9 +69,6 @@ int					Span::shortestSpan()
 	// int	second_min = _array[1];
 	// std::nth_element(_array.begin(), _array.begin() + 1, _array.end(), std::greater<int>());
 	// int	second_max = _array[1];
-	if (_array.size() <= 1) {
-		throw NoSpanFound();
-	}
 	int	shortest_span = INT_MAX;
 	for (int i = 0; i != _array.size() - 1; i++)
 	{
@@ -86,9 +83,6 @@ int					Span::shortestSpan()
 
 int					Span::longestSpan()
 {
-	if (_array.size() <= 1) {
-		throw NoSpanFound();
-	}
 	int	min = *std::min_element(_array.begin(), _array.end());
 	int	max = *std::max_element(_array.begin(), _array.end());
 	return (max - min);
