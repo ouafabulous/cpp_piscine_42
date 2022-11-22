@@ -1,6 +1,7 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp \
+		Span.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 DEPS = $(SRCS:%.cpp=%.d)
 NAME = span

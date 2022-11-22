@@ -37,11 +37,16 @@ Span &				Span::operator=( Span const & rhs )
 	return *this;
 }
 
-// std::ostream &			operator<<( std::ostream & o, Span const & i )
-// {
-	//o << "Value = " << i.getValue();
-	// return o;
-// }
+std::ostream &			operator<<( std::ostream & o, Span const & i )
+{
+	std::cout << "Elements contained in your Span: ";
+	for (unsigned int j = 0; j != i.getArraySize(); j++)
+	{
+		std::cout << i.getArrayValue(j)<< " ";
+	}
+	std::cout << std::endl;
+	return o;
+}
 
 
 /*
@@ -56,12 +61,6 @@ void				Span::addNumber(int number)
 	_array.push_back(number);
 }
 
-void				Span::addNumber(int array[])
-{
-	_array.insert(_array.end(), array);
-}
-
-
 int					Span::shortestSpan()
 {
 	// int	min = *std::min_element(_array.begin(), _array.end());
@@ -73,15 +72,16 @@ int					Span::shortestSpan()
 		throw NoSpanFound();
 	}
 	int	shortest_span = INT_MAX;
-	for (int i = 0; i != _array.size() - 1; i++)
+	for (unsigned int i = 0; i != _array.size() - 1; i++)
 	{
-		for (int j = i + 1; j != _array.size(); j++)
+		for (unsigned int j = i + 1; j != _array.size(); j++)
 		{
 			if(abs(_array[i] - _array[j]) < shortest_span) {
 				shortest_span = abs(_array[i] - _array[j]);
 			}
 		}
 	}
+	return (shortest_span);
 }
 
 int					Span::longestSpan()
@@ -94,6 +94,15 @@ int					Span::longestSpan()
 	return (max - min);
 }
 
+int					Span::getArrayValue(unsigned int i) const
+{
+	return(_array[i]);
+}
+
+unsigned int		Span::getArraySize() const
+{
+	return (_array.size());
+}
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */

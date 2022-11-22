@@ -2,6 +2,7 @@
 # define SPAN_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <string>
 # include <limits>
 # include <vector>
@@ -13,7 +14,6 @@ class Span
 
 	public:
 
-		Span();
 		Span(unsigned int N);
 		Span( Span const & src );
 		~Span();
@@ -22,7 +22,7 @@ class Span
 			public :
 				virtual const char* what() const throw()
 				{
-					return ("Span is already full!\n");
+					return ("Span is full!\n");
 				}
 		};
 		class NoSpanFound : public std::exception
@@ -32,25 +32,32 @@ class Span
 				{
 					return ("Span has got less or equal to one elemen. Can't find shortest/longest span!\n");
 				}
-		} 
+		};
 
 		Span &		operator=( Span const & rhs );
-t
-		void		addNumber(int number);
-		int			shortestSpan();
-		int			longestSpan();
-		void		addNumber();
-		void		addNumber(int array[]);
 
+		void			addNumber(int number);
+		int				shortestSpan();
+		int				longestSpan();
+		void			addNumber();
+		template <typename inputIt>
+		void			addNumber(inputIt begin, inputIt end)
+		{
+			for (int i = 0; i != end - begin; i++) {
+				addNumber(*(begin + i));
+			}
+		};
+		int				getArrayValue(unsigned int i) const;
+		unsigned int	getArraySize() const;
 
 	private:
 
-//		Span();
+		Span();
 		unsigned int		_max_to_store;
 		std::vector<int>	_array;
 
 };
 
-// std::ostream &			operator<<( std::ostream & o, Span const & i );
+std::ostream &			operator<<( std::ostream & o, Span const & i );
 
 #endif /* ************************************************************ SPAN_H */
