@@ -3,8 +3,8 @@
 int main()
 {
 	Span new_span(5);
-	// int arr[] = {102, 105, 76, 1800, 5094};
-	int arr[] = {};
+	int arr[] = {102, 105, 76, 1800, 5094};
+	// int arr[] = {};
 	unsigned int size_arr = sizeof(arr) / sizeof(arr[0]);
 	try
 	{

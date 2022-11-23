@@ -14,7 +14,7 @@ class NotFound : public std::exception
 };
 
 template <typename Container>
-int	easyfind(Container &where_to_find, int to_find)
+int	easyFind(Container &where_to_find, int to_find)
 {
 	int	found_or_not = *find(where_to_find.begin(), where_to_find.end(), to_find);
 	if (found_or_not == *where_to_find.end()) {
