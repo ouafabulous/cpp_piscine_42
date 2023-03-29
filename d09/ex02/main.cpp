@@ -96,9 +96,12 @@ int main(int argc, char const *argv[])
 	clock_t start, end;
     start = clock();
 	//if no int is given, throw an errorcontact@42entrepreneurs.fr
-    if (argc < 2)
+
+	try
 	{
-        throw   std::runtime_error("At least one number is required!\n");
+	if (argc < 2)
+	{
+        throw   std::runtime_error("ERROR\n");
 	}
 	//take all the args, transform them to int and add them to the vector
 	std::vector<int> v;
@@ -109,7 +112,12 @@ int main(int argc, char const *argv[])
         std::stringstream ss(argv[i]);
         int n;
         ss >> n;
-        v.push_back(n);
+		if (!ss.eof() || ss.fail()) {
+			throw   std::runtime_error("ERROR\n");
+		}
+		else {
+			v.push_back(n);
+		}
     }
 	//sort the vector
 	insertMergesort(v, 0, v.size() - 1, 2);
@@ -120,6 +128,12 @@ int main(int argc, char const *argv[])
     end = clock();
     double	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     std::cout << "Time to process a range of" << argc - 1 << " elements with std::vector: "<< cpu_time_used * pow(10,6) << " us" << std::endl;
+
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
     return 0;
 }
