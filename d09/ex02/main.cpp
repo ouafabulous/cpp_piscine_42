@@ -37,21 +37,18 @@ std::vector<int>	merge(std::vector<int> v1, std::vector<int> v2)
 		v.push_back(v2[j]);
 		j++;
 	}
-		}
-{
-	if (v[0] > v[1])
-	{
-		int tmp = v[0];
-		v[0] = v[1];
-		v[1] = tmp;
-	}
+	return (v);
 }
 
 void	insertSort(std::vector<int> &v, unsigned long left, unsigned long right)
 {
 	for (unsigned long i = left + 1; i <= right; i++)
 	{
-		}
+		unsigned long j = i;
+		while (j > left && v[j] < v[j - 1])
+		{
+			int tmp = v[j];
+			v[j] = v[j - 1];
 			v[j - 1] = tmp;
 			j--;
 		}
@@ -93,7 +90,7 @@ std::list<int>	merge(std::list<int> l1, std::list<int> l2)
 	std::list<int>::iterator j = l2.begin();
 	while (i != l1.end() && j != l2.end())
 	{
-		if (i* < *j)
+		if (*i < *j)
 		{
 			l.push_back(*i);
 			i++;
@@ -104,12 +101,12 @@ std::list<int>	merge(std::list<int> l1, std::list<int> l2)
 			j++;
 		}
 	}
-	while (*i != l1.end())
+	while (*i != *(l1.end()))
 	{
 		l.push_back(*i);
 		i++;
 	}
-	while (*j != l2.end())
+	while (*j != *(l2.end()))
 	{
 		l.push_back(*j);
 		j++;
@@ -118,22 +115,29 @@ std::list<int>	merge(std::list<int> l1, std::list<int> l2)
 }
 
 //sort a list of 2 elements
-void	insertSortTwo(std::<int> &l)
+void	insertSortTwo(std::list<int> &l)
 {
-	if (*(l.begin()) > *(l.begin() + 1))
+	std::list<int>::iterator begin = l.begin();
+	std::list<int>::iterator next = begin;
+	next++;
+	if (*begin > *next)
 	{
-		int tmp = *(l.begin());
-		*(l.begin()) = (*(l.begin() + 1));
-		*(l.begin() + 1) = tmp;
+		int tmp = *begin;
+		*begin = *next;
+		*next = tmp;
 	}
 }
 
-loid	insertSort(std::list<int> &l, unsigned long left, unsigned long right)
+void	insertSort(std::list<int> &l, unsigned long left, unsigned long right)
 {
-	for (std::list<int>::iterator i = l.begin()+left+1; i <= l.begin()+right; i++)
+	std::list<int>::iterator i=l.begin();
+	std::advance(i,left+1);
+	std::list<int>::iterator rightIt=l.begin();
+	std::advance(rightIt,right+1);
+	for (i; i != rightIt; i++)
 	{
 		std::list<int>::iterator j = i;
-		while (*j > *(l.begin()+left) && *j < *(j - 1))
+		while (*j > *(.begin()+left) && *j < *(j - 1))
 		{
 			int tmp = *j;
 			*j = *(j-1);
@@ -144,10 +148,12 @@ loid	insertSort(std::list<int> &l, unsigned long left, unsigned long right)
 }
 
 
-loid insertMergesort(std::list<int>& l, unsigned long left, unsigned long right, unsigned long k) {
+void insertMergesort(std::list<int>& l, unsigned long left, unsigned long right, unsigned long k)
+{
   if (right - left + 1 <= k) {
 	insertSort(l, left, right);
-  } else if (left < right) {
+  }
+  else if (left < right) {
     int mid = (left + right) / 2;
     insertMergesort(l, left, mid, k);
     insertMergesort(l, mid + 1, right, k);
@@ -159,7 +165,7 @@ loid insertMergesort(std::list<int>& l, unsigned long left, unsigned long right,
 }
 
 //print the list
-loid	printlist(std::list<int> &l)
+void	printlist(std::list<int> &l)
 {
 	for (unsigned long i = 0; i < l.size(); i++)
 		std::cout << l[i] << " ";
