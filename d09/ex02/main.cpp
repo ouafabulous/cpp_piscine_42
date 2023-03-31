@@ -40,6 +40,17 @@ std::vector<int>	merge(std::vector<int> v1, std::vector<int> v2)
 	return (v);
 }
 
+//sort a vector of 2 elements
+void	insertSortTwo(std::vector<int> &v)
+{
+	if (v[0] > v[1])
+	{
+		int tmp = v[0];
+		v[0] = v[1];
+		v[1] = tmp;
+	}
+}
+
 void	insertSort(std::vector<int> &v, unsigned long left, unsigned long right)
 {
 	for (unsigned long i = left + 1; i <= right; i++)
@@ -134,16 +145,21 @@ void	insertSort(std::list<int> &l, unsigned long left, unsigned long right)
 	std::advance(i,left+1);
 	std::list<int>::iterator rightIt=l.begin();
 	std::advance(rightIt,right+1);
-	for (i; i != rightIt; i++)
+	while (i != rightIt)
 	{
 		std::list<int>::iterator j = i;
-		while (*j > *(.begin()+left) && *j < *(j - 1))
+		std::list<int>::iterator leftIt=l.begin();
+		std::advance(leftIt,left);
+		std::list<int>::iterator beforeJ = j;
+		beforeJ--;
+		while (*j > *(leftIt) && *j < *(beforeJ))
 		{
 			int tmp = *j;
-			*j = *(j-1);
-			*(j - 1) = tmp;
+			*j = *(beforeJ);
+			*(beforeJ) = tmp;
 			j--;
 		}
+		i++;
 	}
 }
 
@@ -157,18 +173,24 @@ void insertMergesort(std::list<int>& l, unsigned long left, unsigned long right,
     int mid = (left + right) / 2;
     insertMergesort(l, left, mid, k);
     insertMergesort(l, mid + 1, right, k);
-    std::list<int> leftSubArray(l.begin() + left, l.begin() + mid + 1);
-    std::list<int> rightSubArray(l.begin() + mid + 1, l.begin() + right + 1);
+	std::list<int>::iterator leftIt=l.begin();
+	std::list<int>::iterator midIt=l.begin();
+	std::list<int>::iterator rightIt=l.begin();
+	std::advance(leftIt,left);
+	std::advance(midIt,mid+1);
+	std::advance(rightIt,right+1);
+    std::list<int> leftSubArray(leftIt, midIt);
+    std::list<int> rightSubArray(midIt, rightIt);
     std::list<int> mergedSubarray = merge(leftSubArray, rightSubArray);
-    std::copy(mergedSubarray.begin(), mergedSubarray.end(), l.begin() + left);
+    std::copy(mergedSubarray.begin(), mergedSubarray.end(), leftIt);
   }
 }
 
 //print the list
-void	printlist(std::list<int> &l)
+void	printList(std::list<int> &l)
 {
-	for (unsigned long i = 0; i < l.size(); i++)
-		std::cout << l[i] << " ";
+	for (std::list<int>::iterator it = l.begin(); it != l.end(); it++)
+		std::cout << *it << " ";
 	std::cout << std::endl;
 }
 
@@ -178,28 +200,29 @@ void	printlist(std::list<int> &l)
 int main(int argc, char const *argv[])
 {
 	clock_t start, end;
-    start = clock();
+	double	cpu_time_used;
 
+    start = clock();
 	try
 	{
 	if (argc < 2)
 	{
-        throw   std::runtime_error("ERROR\n");
+        throw   std::runtime_error("ERROR");
 	}
-	//take all the args, transform them to int and add them to the vector
+
 	std::vector<int> v;
-	std::cout << std::endl;
 	    for (int i = 1; i < argc; ++i) {
         std::stringstream ss(argv[i]);
         int n;
         ss >> n;
 		if (!ss.eof() || ss.fail()) {
-			throw   std::runtime_error("ERROR\n");
+			throw   std::runtime_error("ERROR");
 		}
 		else {
 			v.push_back(n);
 		}
     }
+	std::cout << std::endl << "----------SORTING WITH STD::VECTOR----------" << std::endl << std::endl;
 	std::cout << "Before: ";
 	printVector(v);
 	if (v.size() == 2)
@@ -210,20 +233,44 @@ int main(int argc, char const *argv[])
 	printVector(v);
 	std::cout << std::endl;
     end = clock();
-    double	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector is: "<< cpu_time_used * pow(10,6) << " us" << std::endl;
 	std::cout << std::endl;
-	std::cout << "--------------------------------------------" << std::endl;
 	std::cout << std::endl;
+
+//----------------------------------------------------------------------
+
 	start = clock();
+	std::list<int> l;
+	    for (int i = 1; i < argc; ++i) {
+        std::stringstream ss(argv[i]);
+        int n;
+        ss >> n;
+		if (!ss.eof() || ss.fail()) {
+			throw   std::runtime_error("ERROR");
+		}
+		else {
+			l.push_back(n);
+		}
+    }
+	std::cout << std::endl << "----------SORTING WITH STD::LIST----------" << std::endl << std::endl;
+	std::cout << "Before: ";
+	printList(l);
+	if (l.size() == 2)
+		insertSortTwo(l);
+	else if (l.size() > 2)
+		insertMergesort(l, 0, l.size() - 1, 2);
+	std::cout << std::endl <<"After: ";
+	printList(l);
+	std::cout << std::endl;
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    std::cout << "Time to process a range of " << argc - 1 << " elements with std::list is: "<< cpu_time_used * pow(10,6) << " us" << std::endl;
+	std::cout << std::endl;}
 
-	end = clock();
-
-
-	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what()	<< '\n';
 	}
 
     return 0;
