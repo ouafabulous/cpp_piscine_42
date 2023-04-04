@@ -3,7 +3,7 @@
 void printWithouttrailingZeros(double price)
 {
 	std::ostringstream os;
-	os << price;
+	os << std::fixed << price;
 	std::string s = os.str();
 	size_t pos = s.find_last_not_of('0');
 	if (pos != std::string::npos && s[pos] == '.')
@@ -70,36 +70,27 @@ int main(int argc, char const *argv[])
 		std::string lineData;
 		std::getline(dataFile, lineData);
 		BitcoinExchange data;
-
 		while (std::getline(dataFile, lineData))
 		{
 			regex_match_data(lineData.c_str());
 			Date date(lineData.substr(0, 4), lineData.substr(5, 2), lineData.substr(8, 2));
-			// std::cout << lineData.substr(11, lineData.length() - 11) << std::endl;
 			double price = std::atof(lineData.substr(11, lineData.length() - 11).c_str());
-			// std::cout << lineData.substr(11).c_str() << std::endl;
-			// std::cout << price << std::endl;
 			data.setMap(date, price, DATA);
 		}
-			// for (std::map<Date, double>::const_iterator it = data.getMap().begin(); it != data.getMap().end(); it++)
-				// std::cout << it->first << " | " << it->second << std::endl;
 
 		std::ifstream input(argv[1]);
 		if (!input.is_open())
 			throw std::runtime_error("Could not open input");
 		std::string line;
+		std::getline(input, line);
     	while (std::getline(input, line))
     	{
 			try {
 			regex_match_input(line.c_str());
 			Date date(line.substr(0, 4), line.substr(5, 2), line.substr(8, 2));
 			double price = std::atof(line.substr(13, line.length() - 13).c_str());
-			// std::cout << line.substr(13, line.length() - 13).c_str() << std::endl;
-			// std::cout << price << std::endl;
 			BitcoinExchange input(date, price, INPUT);
 			Date adjustedDate = input.getDate(date, data.getMap());
-			// std::cout << "[DEBUG]" << " input value: " << input.getValue(date) << " data value(normal): "<< data.getValue(date) << std::endl;
-			// std::cout << "adjusted date for this date: " << date << " is " << adjustedDate << std::endl;
 			std::cout << adjustedDate << " => " << std::fixed << std::noshowpoint;
 			printWithouttrailingZeros(input.getValue(date));
 			std::cout <<  " = ";
