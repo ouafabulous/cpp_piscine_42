@@ -39,7 +39,7 @@ void	Date::setDay(unsigned int day) {
 	this->day = day;
 }
 
-void	Date::setMonth(unsigned int month) {
+void	Date::setMonth(unsigned int month) {	//reurn the element before the one we want
 	this->month = month;
 }
 
@@ -54,13 +54,19 @@ bool Date::operator==(const Date &date) const{
 }
 
 bool Date::operator<(const Date& other) const {
-    if (this->year != other.year) {
-        return year < other.year;
-    }
-    if (this->month != other.month) {
+    if (this->year != other.year)
+        return year < other.year;	//reurn the element before the one we want
+    if (this->month != other.month)
         return month < other.month;
-    }
     return this->day < other.day;
+}
+
+bool Date::operator>(const Date& other) const {
+    if (this->year != other.year)
+        return year > other.year;	//reurn the element before the one we want
+    if (this->month != other.month)
+        return month > other.month;
+    return this->day > other.day;
 }
 
 std::ostream &operator<<(std::ostream& os, const Date& date) {
@@ -86,24 +92,33 @@ BitcoinExchange::BitcoinExchange(Date &date, double &price, e_type type) {
 	bitcoinExchange.insert(std::pair<Date, double>(date, price));
 }
 
-Date const &BitcoinExchange::getDate(Date date) const {
-	std::map<Date, double>::const_iterator beginIt = bitcoinExchange.begin();
-	Date ret;
-	std::map<Date, double>::const_iterator it = bitcoinExchange.begin();
-	while (it != bitcoinExchange.end())
+Date const &BitcoinExchange::getDate(Date date, std::map<Date, double> const &data) const {
+	std::map<Date, double>::const_iterator anotherIt;
+	std::map<Date, double>::const_iterator it = data.begin();
+	while (it != data.end())
 	{
 		if (it->first == date)
+		{
+			// std::cout << "I'm returning here! 1" << std::endl;
 			return it->first;
+		}
 		it++;
 	}
-	it--;
-	if (it != beginIt)
-	{
-		it--;
-		return (it->first);
-	}
-	else
+	it = data.begin();
+	if (date < it->first || data.size() < 2)
 		throw std::runtime_error("date doesn't exist");
+	while (it != data.end())
+	{
+		anotherIt = it;
+		anotherIt++;
+		if (date > it->first && date < anotherIt->first)
+		{
+			// std::cout << "I'm returning here! 2" << std::endl;
+			return it->first;
+		}
+		it++;
+	}
+	throw std::runtime_error("date doesn't exist");
 }
 
 double const &BitcoinExchange::getValue(Date &date) const {
@@ -113,4 +128,15 @@ double const &BitcoinExchange::getValue(Date &date) const {
 
 std::map<Date, double> const &BitcoinExchange::getMap() const {
 	return bitcoinExchange;
+}
+
+void	BitcoinExchange::setMap(Date &date, double &price, e_type type)
+{
+		if (type == DATA && price < 0)
+		throw std::runtime_error("Negative rate exchange");
+	else if (type == INPUT && price < 0)
+		throw std::runtime_error("not a positive number.");
+	else if (type == INPUT && price > 1000)
+		throw std::runtime_error("too large a number.");
+	bitcoinExchange.insert(std::pair<Date, double>(date, price));
 }

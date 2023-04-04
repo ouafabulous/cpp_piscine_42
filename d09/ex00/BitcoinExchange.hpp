@@ -8,6 +8,7 @@
 #include <regex.h>
 #include <stdlib.h>
 #include <map>
+#include <iomanip>
 
 typedef enum {
 	INPUT,
@@ -31,6 +32,7 @@ class Date{
 		void setDay(unsigned int day);
 		bool operator==(const Date &date) const;
 		bool operator<(const Date& other) const;
+		bool operator>(const Date& other) const;
 		friend std::ostream &operator<<(std::ostream& os, const Date& date);
 };
 
@@ -38,11 +40,12 @@ class BitcoinExchange {
 	private:
 		std::map<Date, double> bitcoinExchange;
 	public:
-		BitcoinExchange(){};
+		BitcoinExchange(): bitcoinExchange(){};
 		BitcoinExchange(Date &date, double &price, e_type type);
 		~BitcoinExchange(){};
-		Date const &getDate(Date date) const;
+		Date const &getDate(Date date, std::map<Date, double> const &data) const;
 		double const &getValue(Date &date) const;
+		void	setMap(Date &date, double &price, e_type type);
 		std::map<Date, double> const &getMap()	const;
 };
 

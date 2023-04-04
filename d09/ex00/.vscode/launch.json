@@ -5,7 +5,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/btc",
-		"args": ["${workspaceFolder}/inputExample.csv"],
+		"args": ["${workspaceFolder}/input.csv"],
 		"stopAtEntry": false,
 		"cwd": "${fileDirname}",
 		"environment": [],
